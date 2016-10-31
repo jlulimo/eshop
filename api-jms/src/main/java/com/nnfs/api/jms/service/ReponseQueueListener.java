@@ -10,5 +10,7 @@ public class ReponseQueueListener {
 
 	public <T extends Serializable> void receive(T object) {
 		logger.debug(String.format("receive response: %s", object));
+		//todo. add some logic after confirm msg . 
+		
 	}
 }

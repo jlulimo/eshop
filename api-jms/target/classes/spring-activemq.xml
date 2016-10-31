@@ -37,6 +37,10 @@
 		<constructor-arg value="m_topic" />
 	</bean>
 
+	<bean id="responseQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="responseQueue" />
+	</bean>
+
 	<bean id="orderMessageConverter" class="com.nnfs.api.jms.util.OrderMessageConverter" />
 
 	<bean id="jmsQueueTemplate" class="org.springframework.jms.core.JmsTemplate">
@@ -51,7 +55,6 @@
 		<property name="messageConverter" ref="orderMessageConverter"></property>
 	</bean>
 
-	<!-- 消息监听适配器 -->
 	<bean id="messageListenerAdapter"
 		class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
 		<property name="delegate">
@@ -59,17 +62,10 @@
 		</property>
 		<property name="defaultListenerMethod" value="receive" />
 		<property name="messageConverter" ref="orderMessageConverter" />
-		<property name="defaultResponseDestination" ref="defaultResponseQueue"></property>
+		<property name="defaultResponseDestination" ref="responseQueue"></property>
 	</bean>
 
-	<bean id="defaultResponseQueue" class="org.apache.activemq.command.ActiveMQQueue">
-		<constructor-arg>
-			<value>defaultResponseQueue</value>
-		</constructor-arg>
-	</bean>
-
-	<!-- 消息监听适配器 -->
-	<bean id="defaultResponseQueueListenerAdapter"
+	<bean id="responseQueueListenerAdapter"
 		class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
 		<property name="delegate">
 			<bean class="com.nnfs.api.jms.service.ReponseQueueListener" />
@@ -78,27 +74,28 @@
 		<property name="messageConverter" ref="orderMessageConverter" />
 	</bean>
 
-	<bean id="defaultResponseQueueMessageListenerContainer"
+	<bean id="responseQueueMessageListenerContainer"
 		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="destination" ref="defaultResponseQueue" />
-		<property name="messageListener" ref="defaultResponseQueueListenerAdapter" />
+		<property name="destination" ref="responseQueue" />
+		<property name="messageListener" ref="responseQueueListenerAdapter" />
+		<property name="concurrency" value="5-10"></property>
+		<!-- <property name="sessionTransacted" value="true"></property> -->
 	</bean>
 
-	<!-- 消息监听适配器对应的监听容器 -->
-	<bean id="messageListenerAdapterContainer"
+	<bean id="topicMessageListenerAdapterContainer"
 		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="topicDestination" />
-		<property name="messageListener" ref="messageListenerAdapter" /><!-- 
-			使用MessageListenerAdapter来作为消息监听器 -->
+		<property name="messageListener" ref="messageListenerAdapter" />
+		<property name="concurrency" value="5-10"></property>
 	</bean>
 
-	<bean id="messageListenerAdapterContainer2"
+	<bean id="queueMessageListenerAdapterContainer"
 		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="queueDestination" />
-		<property name="messageListener" ref="messageListenerAdapter" /><!-- 
-			使用MessageListenerAdapter来作为消息监听器 -->
+		<property name="messageListener" ref="messageListenerAdapter" />
+		<property name="concurrency" value="5-10"></property>
 	</bean>
 </beans>

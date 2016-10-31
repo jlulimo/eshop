@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amq="http://activemq.apache.org/schema/core"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd   
+        http://www.springframework.org/schema/context   
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/jms
+        http://www.springframework.org/schema/jms/spring-jms-4.0.xsd
+        http://activemq.apache.org/schema/core
+        http://activemq.apache.org/schema/core/activemq-core-5.8.0.xsd">
+
+	<bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="tcp://localhost:61616" />
+		<property name="userName" value="admin" />
+		<property name="password" value="admin" />
+		<property name="trustAllPackages" value="true"></property>
+	</bean>
+
+	<!-- You can use the activemq-pool org.apache.activemq.pool.PooledConnectionFactory 
+		for efficient pooling of the connections and sessions for your collection 
+		of consumers, or you can use the Spring JMS org.springframework.jms.connection.CachingConnectionFactory 
+		to achieve the same effect. -->
+	<bean id="connectionFactory"
+		class="org.springframework.jms.connection.CachingConnectionFactory">
+		<property name="targetConnectionFactory" ref="targetConnectionFactory"></property>
+		<property name="sessionCacheSize" value="100" />
+	</bean>
+
+	<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="m_queue" />
+	</bean>
+
+	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg value="m_topic" />
+	</bean>
+
+	<bean id="orderMessageConverter" class="com.nnfs.api.jms.util.OrderMessageConverter" />
+
+	<bean id="jmsQueueTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<constructor-arg ref="connectionFactory" />
+		<property name="pubSubDomain" value="false"></property>
+		<property name="messageConverter" ref="orderMessageConverter"></property>
+	</bean>
+
+	<bean id="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<constructor-arg ref="connectionFactory" />
+		<property name="pubSubDomain" value="true" />
+		<property name="messageConverter" ref="orderMessageConverter"></property>
+	</bean>
+
+	<!-- 消息监听适配器 -->
+	<bean id="messageListenerAdapter"
+		class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<property name="delegate">
+			<bean class="com.nnfs.api.jms.service.ConsumerListener" />
+		</property>
+		<property name="defaultListenerMethod" value="receive" />
+		<property name="messageConverter" ref="orderMessageConverter" />
+		<property name="defaultResponseDestination" ref="defaultResponseQueue"></property>
+	</bean>
+
+	<bean id="defaultResponseQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg>
+			<value>defaultResponseQueue</value>
+		</constructor-arg>
+	</bean>
+
+	<!-- 消息监听适配器 -->
+	<bean id="defaultResponseQueueListenerAdapter"
+		class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<property name="delegate">
+			<bean class="com.nnfs.api.jms.service.ReponseQueueListener" />
+		</property>
+		<property name="defaultListenerMethod" value="receive" />
+		<property name="messageConverter" ref="orderMessageConverter" />
+	</bean>
+
+	<bean id="defaultResponseQueueMessageListenerContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="defaultResponseQueue" />
+		<property name="messageListener" ref="defaultResponseQueueListenerAdapter" />
+	</bean>
+
+	<!-- 消息监听适配器对应的监听容器 -->
+	<bean id="messageListenerAdapterContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="topicDestination" />
+		<property name="messageListener" ref="messageListenerAdapter" /><!-- 
+			使用MessageListenerAdapter来作为消息监听器 -->
+	</bean>
+
+	<bean id="messageListenerAdapterContainer2"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="queueDestination" />
+		<property name="messageListener" ref="messageListenerAdapter" /><!-- 
+			使用MessageListenerAdapter来作为消息监听器 -->
+	</bean>
+</beans>

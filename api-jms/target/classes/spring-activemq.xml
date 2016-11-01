@@ -79,7 +79,7 @@
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="responseQueue" />
 		<property name="messageListener" ref="responseQueueListenerAdapter" />
-		<property name="concurrency" value="5-10"></property>
+		<property name="concurrency" value="2-4"></property>
 		<!-- <property name="sessionTransacted" value="true"></property> -->
 	</bean>
 
@@ -88,7 +88,7 @@
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="topicDestination" />
 		<property name="messageListener" ref="messageListenerAdapter" />
-		<property name="concurrency" value="5-10"></property>
+		<property name="concurrency" value="1"></property>
 	</bean>
 
 	<bean id="queueMessageListenerAdapterContainer"
@@ -96,6 +96,6 @@
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="queueDestination" />
 		<property name="messageListener" ref="messageListenerAdapter" />
-		<property name="concurrency" value="5-10"></property>
+		<property name="concurrency" value="1"></property>
 	</bean>
 </beans>

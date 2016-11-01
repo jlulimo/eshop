@@ -23,6 +23,18 @@ public class ProducerServiceImplTest {
 		orderMsgModel.setOrderNo(123);
 		orderMsgModel.setStatus(1);
 		this.producerServiceImpl.send(orderMsgModel);
+		
+		int i = 0;
+		while (i < 13) {
+			try {
+				Thread.sleep(1000);
+				i++;
+				System.out.println("waiting...");
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

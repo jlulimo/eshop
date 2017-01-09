@@ -48,9 +48,8 @@ public class SimpleTest {
 		SecurityUtils.setSecurityManager(securityManager);
 		
 		Subject subject = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken("zhang", "123");
+		UsernamePasswordToken token = new UsernamePasswordToken("hou", "123");
 		subject.login(token);
-		
 		System.out.println(subject.isAuthenticated());
 		subject.logout();
 	}

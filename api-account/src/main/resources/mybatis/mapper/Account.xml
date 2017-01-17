@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nnfs.api.account.dao.AccountDao">
+	<!-- 通过id查找account -->
+	<select id="getAccountById" parameterType="java.lang.long" resultType="Account">
+		select * from t_account where id = #{id}
+	</select>
+	
+	<select id="getAccountByName" parameterType="java.lang.String" resultType="Account">
+		select * from t_account where name like '%${value}%'
+	</select>
+	
+	
+	 
+</mapper>

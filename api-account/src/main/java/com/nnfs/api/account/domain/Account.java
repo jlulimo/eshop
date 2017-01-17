@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Account {
 	private long id;
+	private String accountId;
 	private int type;
 	private String name;
 	private String password;
@@ -12,6 +13,14 @@ public class Account {
 	private boolean locked;
 	private List<Role> roles;
 	private List<Group> groups;
+
+	public String getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
+	}
 
 	public int getType() {
 		return type;

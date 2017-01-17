@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import com.nnfs.api.jms.domain.City;
 
 @Component
+
 public class CityDao {
 
 	@Autowired

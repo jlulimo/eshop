@@ -7,13 +7,9 @@ public interface GenericDao<T> {
 
 	public T get(long id);
 
-	public T get(String id);
-
 	public void update(T t);
 
 	public void delete(long id);
-
-	public void delete(String id);
 
 	public List<T> getAll();
 

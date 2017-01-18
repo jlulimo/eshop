@@ -18,6 +18,7 @@ create table t_account (
   password varchar(100),
   salt varchar(100),
   type int,
+  enable tinyint,
   deleted tinyint,
   locked tinyint,
   constraint pk_t_account primary key(id)

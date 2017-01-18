@@ -11,8 +11,17 @@ public class Account {
 	private String salt;
 	private boolean deleted;
 	private boolean locked;
+	private boolean enable;
 	private List<Role> roles;
 	private List<Group> groups;
+
+	public boolean isEnable() {
+		return enable;
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
 
 	public String getAccountId() {
 		return accountId;

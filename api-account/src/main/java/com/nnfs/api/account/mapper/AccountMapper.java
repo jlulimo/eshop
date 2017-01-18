@@ -6,5 +6,5 @@ import com.nnfs.api.account.domain.Account;
 
 @Mapper
 public interface AccountMapper extends GenericMapper<Account> {
-	int count();
+	public int count();
 }

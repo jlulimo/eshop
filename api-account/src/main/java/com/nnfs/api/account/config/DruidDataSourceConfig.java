@@ -24,10 +24,11 @@ public class DruidDataSourceConfig implements EnvironmentAware {
 		this.propertyResolver = new RelaxedPropertyResolver(environment, "spring.datasource.");
 	}
 
-	@Bean
+	@Bean(initMethod = "init", destroyMethod = "close")
 	public DataSource dataSource() {
 		DruidDataSource druidDataSource = new DruidDataSource();
-		druidDataSource.setDbType(this.propertyResolver.getProperty("type"));
+		// mybatis 不支持setType = druid
+//		druidDataSource.setDbType(this.propertyResolver.getProperty("type"));
 		druidDataSource.setUrl(this.propertyResolver.getProperty("url"));
 		druidDataSource.setDriverClassName(this.propertyResolver.getProperty("driver-class-name"));
 		druidDataSource.setUsername(this.propertyResolver.getProperty("username"));

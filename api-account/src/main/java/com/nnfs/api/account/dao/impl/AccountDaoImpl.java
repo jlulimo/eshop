@@ -7,7 +7,7 @@ import com.nnfs.api.account.dao.AccountDao;
 import com.nnfs.api.account.domain.Account;
 import com.nnfs.api.account.mapper.AccountMapper;
 
-@Repository(value="accountDaoImpl")
+@Repository
 public class AccountDaoImpl extends GenericDaoImpl<Account> implements AccountDao {
 	
 	@Autowired

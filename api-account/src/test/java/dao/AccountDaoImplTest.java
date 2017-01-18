@@ -3,16 +3,13 @@ package dao;
 import javax.annotation.Resource;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import com.nnfs.api.account.App;
 import com.nnfs.api.account.dao.AccountDao;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = App.class)
-public class AccountDaoImplTest {
+import base.TestBase;
+
+
+public class AccountDaoImplTest extends TestBase {
 	@Resource(name="accountDaoImpl")
 	private AccountDao dao;
 	

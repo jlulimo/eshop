@@ -2,8 +2,6 @@ package com.nnfs.api.account.dao.impl;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import com.nnfs.api.account.dao.GenericDao;
 import com.nnfs.api.account.mapper.GenericMapper;
 

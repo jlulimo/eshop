@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nnfs.api.account.mapper.RoleMapper">
+	<select id="get" parameterType="long" resultType="Role">
+		select * from
+		t_role where id = #{id}
+	</select>
+
+	<select id="getRoleByName" parameterType="String" resultType="Role">
+		select * from t_role where name = #{roleName}
+	</select>
+
+	<select id="getAll" resultType="Role">
+		select * from t_role;
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) from t_role
+	</select>
+
+	<insert id="create" parameterType="Role">
+		insert into t_role (name,type)
+		values (#{name},#{type})
+	</insert>
+
+	<update id="update" parameterType="Role">
+		update t_role set name =
+		#{name}, type=#{type}
+		where id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="long">
+		delete from t_role where id =
+		#{id}
+	</delete>
+</mapper>

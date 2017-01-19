@@ -17,6 +17,11 @@ public class AccountDaoImpl extends GenericDaoImpl<Account> implements AccountDa
 		return accountMapper.count();
 	}
 
+	@Override
+	public Account getAccountByName(String accountName) {
+		return accountMapper.getAccountByName(accountName);
+	}
+
 
 
 }

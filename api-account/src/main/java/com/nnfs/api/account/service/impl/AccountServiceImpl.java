@@ -9,15 +9,21 @@ import com.nnfs.api.account.dto.AccountDto;
 import com.nnfs.api.account.service.AccountService;
 
 @Service
-public class AccountServiceImpl extends GenericServiceImpl<AccountDto,Account> implements AccountService {
+public class AccountServiceImpl extends GenericServiceImpl<AccountDto, Account> implements AccountService {
 
 	@Autowired
 	private AccountDao accountDaoImpl;
+
 	@Override
 	public int count() {
 		return accountDaoImpl.count();
 	}
-	
+
+	@Override
+	public AccountDto getAccountByName(String accountName) {
+		return this.convertToDto(this.accountDaoImpl.getAccountByName(accountName));
+	}
+
 	@Override
 	public Account convertToDomain(AccountDto t) {
 		Account domain = new Account();
@@ -34,6 +40,7 @@ public class AccountServiceImpl extends GenericServiceImpl<AccountDto,Account> i
 		domain.setType(t.getType());
 		return domain;
 	}
+
 	@Override
 	public AccountDto convertToDto(Account d) {
 		AccountDto dto = new AccountDto();

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:config/shiro/ehcache-shiro.xml" />
+	</bean>
+	<bean id="accountRealm" class="com.nnfs.api.account.realm.AccountRealm"></bean>
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realms">
+			<list>
+				<ref bean="accountRealm" />
+			</list>
+		</property>
+		<property name="cacheManager" ref="cacheManager" />
+	</bean>
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+	<!-- Shiro的Web过滤器 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/login" />
+		<property name="unauthorizedUrl" value="/unauthorized  " />
+		<property name="filters">
+			<util:map>
+				<entry key="authc">
+					<!-- 身份验证拦截器，默认为FormAuthenticationFilter，但 PassThruAuthenticationFilter功能相对强大，详情见 
+						https://shiro.apache.org/static/1.2.1/apidocs/org/apache/shiro/web/filter/authc/PassThruAuthenticationFilter.html -->
+					<bean
+						class="org.apache.shiro.web.filter.authc.PassThruAuthenticationFilter" />
+				</entry>
+			</util:map>
+		</property>
+
+		<!-- shiro的强大的拦截器链，可以匹配全部的url，并根据配置进行拦截 -->
+		<property name="filterChainDefinitions">
+			<value>
+				# 无需认证便可以访问的的文件放在前面
+				/js/* = anon
+				/css/* = anon
+				/img/* = anon
+				/images/* = anon
+
+				/login = anon
+				/logout = logout
+
+				/login/* = authc
+			</value>
+		</property>
+	</bean>
+
+	<!-- 开启Shiro的注解(如@RequiresRoles,@RequiresPermissions),需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证 -->
+	<!-- 这里要配置以下两个bean,在这之前要配置好lifecycleBeanPostProcessor -->
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor">
+		<!-- 加上下面这一句是为了解决If the controller requires proxying (e.g. due to @Transactional), 
+			please use class-based proxying 的报错 -->
+		<!-- 参考http://www.cnblogs.com/digdeep/p/4624998.html 会发现上面错误是 Spring AOP 
+			不同配置方式产生的冲突问题 -->
+		<property name="proxyTargetClass" value="true" />
+	</bean>
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+	<!-- 异常拦截 -->
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<!-- 未授权处理页 -->
+				<prop key="org.apache.shiro.authz.UnauthorizedException">
+					/unauthorized
+				</prop>
+				<!-- 身份没有验证 -->
+				<prop key="org.apache.shiro.authz.UnauthenticatedException">
+					/login
+				</prop>
+			</props>
+		</property>
+	</bean>
+</beans>

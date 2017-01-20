@@ -1,5 +1,14 @@
 package com.nnfs.api.account.controller;
 
-public class AccountController {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+import com.nnfs.api.account.service.AccountService;
+
+@Controller
+public class AccountController {
+	@Autowired
+	private AccountService accountService;
+	
+	
 }

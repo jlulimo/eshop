@@ -94,6 +94,8 @@ public class AccountRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+		
+		
 		AccountToken statelessToken = (AccountToken)token;
 		String accountName = statelessToken.getUsername();
 		AccountDto accountDto = this.accountService.getAccountByName(accountName);

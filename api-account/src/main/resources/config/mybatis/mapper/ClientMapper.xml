@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nnfs.api.account.mapper.ClientMapper">
+	<select id="get" parameterType="long" resultType="Client">
+		select * from t_client where id = #{id}
+	</select>
+	
+	<select id="findByClientId"  parameterType="String" resultType="Client">
+		select * from t_client where clientId=#{clientId}
+	</select>
+	
+	<select id="findByClientSecret" parameterType="String" resultType="Client">
+		select * from t_client where secret = #{secret}
+	</select>
+	
+	<select id="getAccountByName" parameterType="String" resultType="Client">
+		select * from t_client where name = #{name}
+	</select>
+
+	<select id="getAll" resultType="Client">
+		select * from t_client;
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) from t_client
+	</select>
+
+	<insert id="create" parameterType="Client">
+		insert into t_client (name,clientId,secret) values (#{name},#{clientId},#{secret})
+	</insert>
+
+	<update id="update" parameterType="Client">
+		update t_client set name =
+		#{name}, clientId = #{clientId}, secret=#{secret}
+		where id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="long">
+		delete from t_client where id = #{id}
+	</delete>
+</mapper>

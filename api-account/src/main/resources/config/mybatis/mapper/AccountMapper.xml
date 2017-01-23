@@ -8,7 +8,7 @@
 	</select>
 	
 	<select id="getAccountByName" parameterType="String" resultType="Account">
-		select * from t_account where name = #{accountName}
+		select * from t_account where name = #{name}
 	</select>
 
 	<select id="getAll" resultType="Account">

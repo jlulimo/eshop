@@ -35,6 +35,11 @@ public class AccountRealm extends AuthorizingRealm {
 	@Autowired
 	private RoleService roleService;
 
+	@Override
+	public boolean supports(AuthenticationToken token) {
+		return token instanceof AccountToken;
+	}
+
 	/**
 	 * 授权
 	 */
@@ -89,7 +94,8 @@ public class AccountRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		String accountName = (String) token.getPrincipal();
+		AccountToken statelessToken = (AccountToken)token;
+		String accountName = statelessToken.getUsername();
 		AccountDto accountDto = this.accountService.getAccountByName(accountName);
 		if (null == accountDto) {
 			throw new UnknownAccountException(PromptMsg.Account_does_not_exist.getMsg());
@@ -99,6 +105,10 @@ public class AccountRealm extends AuthorizingRealm {
 		}
 		return new SimpleAuthenticationInfo(accountDto.getName(), accountDto.getPassword(),
 				ByteSource.Util.bytes(accountDto.getSalt()), this.getName());
+	}
+	
+	private String getAccessToken(String accountName){
+		return "helloword!";
 	}
 
 }

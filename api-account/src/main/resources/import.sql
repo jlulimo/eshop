@@ -11,6 +11,7 @@ drop table if exists t_account_role;
 drop table if exists t_account_group;
 drop table if exists t_group_role;
 drop table if exists t_role_permission;
+drop table if exists t_client;
 
 create table t_account (
   id bigint auto_increment,
@@ -75,6 +76,14 @@ create table t_role_permission(
 	role_id bigint,
 	permission_id bigint,
 	constraint pk_t_role_permission primary key(id)
+)charset=utf8 ENGINE=InnoDB;
+
+create table t_client(
+	id bigint auto_increment,
+	name varchar(100),
+	clientId varchar(100),
+	secret varchar(100),
+	constraint pk_t_client primary key(id)
 )charset=utf8 ENGINE=InnoDB;
 
 insert into t_account(name,password)values('zhang','123');

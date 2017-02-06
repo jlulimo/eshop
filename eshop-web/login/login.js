@@ -11,12 +11,13 @@ $(function() {
             	var username = $('#username').val();
             	var password = $('#password').val();
 				$.ajax({
-				        	url: constants.BASE_URL + "login",
+				        	url: constants.BASE_URL + "/login",
 				        	type: 'POST',
 				        	dataType: 'json',
 				        	data: {
 				        		username: username,
-				        		password:password
+				        		password:password,
+				        		rememberMe:false
 				        	},
 				        })
 				        .done(function() {

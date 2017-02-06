@@ -16,9 +16,9 @@ public class OAuthServiceImpl implements OAuthService {
 	@Autowired
 	private ClientService clientServiceImpl;
 
-	public OAuthServiceImpl(CacheManager cacheManager) {
-		this.cache = cacheManager.getCache("code-cache");
-	}
+//	public OAuthServiceImpl(CacheManager cacheManager) {
+//		this.cache = cacheManager.getCache("code-cache");
+//	}
 
 	@Override
 	public void addAuthCode(String authCode, String username) {

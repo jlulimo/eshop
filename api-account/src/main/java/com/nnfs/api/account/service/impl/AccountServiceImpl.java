@@ -2,6 +2,7 @@ package com.nnfs.api.account.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nnfs.api.account.dao.AccountDao;
 import com.nnfs.api.account.domain.Account;
@@ -28,6 +29,7 @@ public class AccountServiceImpl extends GenericServiceImpl<AccountDto, Account> 
 	public Account convertToDomain(AccountDto t) {
 		Account domain = new Account();
 		domain.setAccountId(t.getAccountId());
+		domain.setEmail(t.getEmail());
 		domain.setDeleted(t.isDeleted());
 		domain.setEnable(t.isEnable());
 		domain.setGroups(t.getGroups());
@@ -45,6 +47,7 @@ public class AccountServiceImpl extends GenericServiceImpl<AccountDto, Account> 
 	public AccountDto convertToDto(Account d) {
 		AccountDto dto = new AccountDto();
 		dto.setAccountId(d.getAccountId());
+		dto.setEmail(d.getEmail());
 		dto.setDeleted(d.isDeleted());
 		dto.setEnable(d.isEnable());
 		dto.setGroups(d.getGroups());
@@ -59,9 +62,11 @@ public class AccountServiceImpl extends GenericServiceImpl<AccountDto, Account> 
 	}
 
 	@Override
+	@Transactional
 	public AccountDto registerAccount(AccountDto accountDto) {
 		this.add(accountDto);
-		AccountDto result = this.convertToDto(accountDaoImpl.getByAccountId(accountDto.getAccountId()));
+		AccountDto result = null;
+		result = this.convertToDto(accountDaoImpl.getByAccountId(accountDto.getAccountId()));
 		return result;
 	}
 

@@ -15,6 +15,7 @@ drop table if exists t_client;
 
 create table t_account (
   id bigint auto_increment,
+  accountId varchar(100),
   name varchar(100),
   password varchar(100),
   salt varchar(100),

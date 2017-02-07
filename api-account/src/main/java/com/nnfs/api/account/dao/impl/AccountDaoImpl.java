@@ -12,6 +12,15 @@ public class AccountDaoImpl extends GenericDaoImpl<Account> implements AccountDa
 
 	@Autowired
 	private AccountMapper accountMapper;
+	
+	@Autowired
+	public void setBaseMapper(){
+		super.setMapper(this.accountMapper);
+	}
+
+	public void setAccountMapper(AccountMapper accountMapper) {
+		this.accountMapper = accountMapper;
+	}
 
 	public int count() {
 		return accountMapper.count();

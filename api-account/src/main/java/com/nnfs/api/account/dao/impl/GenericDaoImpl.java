@@ -10,6 +10,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 	
 	private GenericMapper<T> mapper;
 
+	
 	public GenericMapper<T> getMapper() {
 		return mapper;
 	}

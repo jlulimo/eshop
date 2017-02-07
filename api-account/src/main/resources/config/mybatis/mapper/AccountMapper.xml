@@ -24,7 +24,7 @@
 	</select>
 
 	<insert id="create" parameterType="Account">
-		insert into t_account (name,password,salt,type,enable,deleted,locked) values (#{name},#{password},#{salt},#{type},#{enable},#{deleted},#{locked})
+		insert into t_account (accountId,name,password,salt,email,type,enable,deleted,locked) values (#{accountId},#{name},#{password},#{salt},#{email},#{type},#{enable},#{deleted},#{locked})
 	</insert>
 
 	<update id="update" parameterType="Account">

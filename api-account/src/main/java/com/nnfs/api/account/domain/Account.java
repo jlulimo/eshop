@@ -8,12 +8,21 @@ public class Account {
 	private int type;
 	private String name;
 	private String password;
+	private String email;
 	private String salt;
 	private boolean deleted;
 	private boolean locked;
 	private boolean enable;
 	private List<Role> roles;
 	private List<Group> groups;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public boolean isEnable() {
 		return enable;

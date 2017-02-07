@@ -45,7 +45,8 @@
 		</property>
 		<property name="filterChainDefinitions">
 			<value>
-				/**=statelessAuthc
+				/register = anon
+				/aaa=statelessAuthc
 			</value>
 		</property>
 	</bean>

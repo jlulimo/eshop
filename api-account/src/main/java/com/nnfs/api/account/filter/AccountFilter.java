@@ -25,10 +25,10 @@ public class AccountFilter extends AccessControlFilter {
 	@Override
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
 		// 1、客户端生成的消息摘要
-		String clientDigest = request.getParameter(ProtocolConstant.digest.getName());
+//		String clientDigest = request.getParameter(ProtocolConstant.digest.getName());
 		// 2、客户端传入的用户身份
 		String username = request.getParameter(ProtocolConstant.accountName.getName());
-
+		String password = request.getParameter("password");
 		// 3、客户端请求的参数列表
 		Map<String, String[]> params = new HashMap<String, String[]>(request.getParameterMap());
 		params.remove(ProtocolConstant.digest.getName());
@@ -36,8 +36,9 @@ public class AccountFilter extends AccessControlFilter {
 		// 4、生成无状态Token
 		AccountToken token = new AccountToken();
 		token.setUsername(username);
-		token.setClientDigest(clientDigest);
-		token.setParams(params);
+		token.setPassword(password);
+//		token.setParams(params);
+//		getSubject(request, response)
 
 		try {
 			// 5、委托给Realm进行登录

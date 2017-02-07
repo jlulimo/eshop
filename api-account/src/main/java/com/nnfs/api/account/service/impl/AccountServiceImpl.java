@@ -48,7 +48,7 @@ public class AccountServiceImpl extends GenericServiceImpl<AccountDto, Account> 
 		dto.setDeleted(d.isDeleted());
 		dto.setEnable(d.isEnable());
 		dto.setGroups(d.getGroups());
-		dto.setId(d.getId());
+		// dto.setId(d.getId());
 		dto.setLocked(d.isLocked());
 		dto.setName(d.getName());
 		dto.setPassword(d.getPassword());
@@ -56,6 +56,13 @@ public class AccountServiceImpl extends GenericServiceImpl<AccountDto, Account> 
 		dto.setSalt(d.getSalt());
 		dto.setType(d.getType());
 		return dto;
+	}
+
+	@Override
+	public AccountDto registerAccount(AccountDto accountDto) {
+		this.add(accountDto);
+		AccountDto result = this.convertToDto(accountDaoImpl.getByAccountId(accountDto.getAccountId()));
+		return result;
 	}
 
 }

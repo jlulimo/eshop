@@ -18,6 +18,7 @@ create table t_account (
   name varchar(100),
   password varchar(100),
   salt varchar(100),
+  email varchar(100),
   type int,
   enable tinyint,
   deleted tinyint,

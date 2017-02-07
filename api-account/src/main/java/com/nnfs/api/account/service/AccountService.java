@@ -6,4 +6,5 @@ public interface AccountService extends GenericService<AccountDto> {
 	public int count();
 
 	public AccountDto getAccountByName(String accountName);
+	public AccountDto registerAccount(AccountDto accountDto);
 }

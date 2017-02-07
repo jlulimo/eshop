@@ -7,6 +7,10 @@
 		select * from t_account where id = #{id}
 	</select>
 	
+	<select id="getByAccountId" parameterType="String" resultType="Account">
+		select * from t_account where accountId = #{accountId}
+	</select>
+	
 	<select id="getAccountByName" parameterType="String" resultType="Account">
 		select * from t_account where name = #{name}
 	</select>

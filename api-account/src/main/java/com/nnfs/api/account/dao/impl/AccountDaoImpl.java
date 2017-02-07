@@ -9,10 +9,10 @@ import com.nnfs.api.account.mapper.AccountMapper;
 
 @Repository
 public class AccountDaoImpl extends GenericDaoImpl<Account> implements AccountDao {
-	
+
 	@Autowired
 	private AccountMapper accountMapper;
-	
+
 	public int count() {
 		return accountMapper.count();
 	}
@@ -22,6 +22,9 @@ public class AccountDaoImpl extends GenericDaoImpl<Account> implements AccountDa
 		return accountMapper.getAccountByName(accountName);
 	}
 
-
+	@Override
+	public Account getByAccountId(String accountId) {
+		return accountMapper.getByAccountId(accountId);
+	}
 
 }

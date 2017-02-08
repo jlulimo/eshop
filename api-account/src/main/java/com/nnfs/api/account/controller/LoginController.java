@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nnfs.api.account.dto.Result;
 
@@ -14,6 +15,7 @@ import com.nnfs.api.account.dto.Result;
 public class LoginController {
 //	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@RequestMapping(value="login",method = RequestMethod.POST)
+	@ResponseBody
 	public Result Login(@RequestParam(value="username") String username,
 			@RequestParam(value="password") String password,
 			@RequestParam(value="rememberMe") Boolean rememberMe){

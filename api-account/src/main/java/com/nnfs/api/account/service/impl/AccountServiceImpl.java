@@ -45,6 +45,9 @@ public class AccountServiceImpl extends GenericServiceImpl<AccountDto, Account> 
 
 	@Override
 	public AccountDto convertToDto(Account d) {
+		if (null == d) {
+			return null;
+		}
 		AccountDto dto = new AccountDto();
 		dto.setAccountId(d.getAccountId());
 		dto.setEmail(d.getEmail());

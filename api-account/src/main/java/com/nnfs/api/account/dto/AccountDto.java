@@ -19,6 +19,10 @@ public class AccountDto {
 	private List<Group> groups;
 	private String email;
 
+	public String getCredentialsSalt() {
+		return name + salt;
+	}
+
 	public String getEmail() {
 		return email;
 	}

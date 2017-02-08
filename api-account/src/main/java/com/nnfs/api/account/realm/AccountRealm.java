@@ -11,6 +11,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -94,23 +95,20 @@ public class AccountRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		
-		
-		AccountToken statelessToken = (AccountToken)token;
+		UsernamePasswordToken statelessToken = (UsernamePasswordToken) token;
 		String accountName = statelessToken.getUsername();
 		AccountDto accountDto = this.accountService.getAccountByName(accountName);
 		if (null == accountDto) {
 			throw new UnknownAccountException(PromptMsg.Account_does_not_exist.getMsg());
 		}
+		if (!accountDto.isEnable()) {
+			//todo
+		}
 		if (accountDto.isLocked()) {
 			throw new LockedAccountException(PromptMsg.Account_is_locked.getMsg()); // 帐号锁定
 		}
 		return new SimpleAuthenticationInfo(accountDto.getName(), accountDto.getPassword(),
-				ByteSource.Util.bytes(accountDto.getSalt()), this.getName());
-	}
-	
-	private String getAccessToken(String accountName){
-		return "helloword!";
+				ByteSource.Util.bytes(accountDto.getCredentialsSalt()), this.getName());
 	}
 
 }

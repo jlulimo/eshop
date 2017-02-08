@@ -18,7 +18,6 @@ public class LoginController {
 			@RequestParam(value="password") String password,
 			@RequestParam(value="rememberMe") Boolean rememberMe){
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
-		token.getCredentials();
 		try {
 			SecurityUtils.getSubject().login(token);
 		} catch (AuthenticationException e) {

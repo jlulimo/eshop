@@ -38,7 +38,7 @@ public class AccountRealm extends AuthorizingRealm {
 
 	@Override
 	public boolean supports(AuthenticationToken token) {
-		return token instanceof AccountToken;
+		return token instanceof UsernamePasswordToken;
 	}
 
 	/**

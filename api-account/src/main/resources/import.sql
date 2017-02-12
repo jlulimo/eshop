@@ -11,7 +11,8 @@ drop table if exists t_account_role;
 drop table if exists t_account_group;
 drop table if exists t_group_role;
 drop table if exists t_role_permission;
-drop table if exists t_client;
+drop table if exists t_account_token;
+
 
 create table t_account (
   id bigint auto_increment,
@@ -80,11 +81,10 @@ create table t_role_permission(
 	constraint pk_t_role_permission primary key(id)
 )charset=utf8 ENGINE=InnoDB;
 
-create table t_client(
+create table t_account_token(
 	id bigint auto_increment,
-	name varchar(100),
-	clientId varchar(100),
-	secret varchar(100),
+	accountId varchar(100),
+	token varchar(100),
 	constraint pk_t_client primary key(id)
 )charset=utf8 ENGINE=InnoDB;
 

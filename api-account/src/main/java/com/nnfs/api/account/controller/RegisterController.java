@@ -40,8 +40,8 @@ public class RegisterController {
 		AccountDto addedAccount = accountService.registerAccount(accountDto);
 		if (null != addedAccount) {
 			Result result = new Result();
-			result.setCode(PromptMsg.regist_success.getCode());
-			result.setMsg(PromptMsg.regist_success.getMsg());
+			result.setCode(PromptMsg.ACCOUNT_ADD_SUCCESS.getCode());
+			result.setMsg(PromptMsg.ACCOUNT_ADD_SUCCESS.getMsg());
 			return result;
 		}
 		return null;

@@ -55,7 +55,7 @@ public class AccountFilter extends AccessControlFilter {
 	private void onLoginFail(ServletResponse response) throws IOException {
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-		httpResponse.getWriter().write(PromptMsg.login_error.getMsg());
+		httpResponse.getWriter().write(PromptMsg.LOGIN_ERROR.getMsg());
 	}
 
 }

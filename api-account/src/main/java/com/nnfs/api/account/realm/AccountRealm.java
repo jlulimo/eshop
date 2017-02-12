@@ -86,7 +86,7 @@ public class AccountRealm extends AuthorizingRealm {
 			}
 			return simpleAuthorizationInfo;
 		} else {
-			throw new UnknownAccountException(PromptMsg.Account_does_not_exist.getMsg());
+			throw new UnknownAccountException(PromptMsg.ACCOUNT_NOT_EXIST.getMsg());
 		}
 	}
 
@@ -94,19 +94,18 @@ public class AccountRealm extends AuthorizingRealm {
 	 * 认证
 	 */
 	@Override
-	
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		UsernamePasswordToken statelessToken = (UsernamePasswordToken) token;
 		String accountName = statelessToken.getUsername();
 		AccountDto accountDto = this.accountService.getAccountByName(accountName);
 		if (null == accountDto) {
-			throw new UnknownAccountException(PromptMsg.Account_does_not_exist.getMsg());
+			throw new UnknownAccountException(PromptMsg.ACCOUNT_NOT_EXIST.getMsg());
 		}
 		if (!accountDto.isEnable()) {
 			//todo
 		}
 		if (accountDto.isLocked()) {
-			throw new LockedAccountException(PromptMsg.Account_is_locked.getMsg()); // 帐号锁定
+			throw new LockedAccountException(PromptMsg.ACCOUNT_LOCKED.getMsg()); // 帐号锁定
 		}
 		return new SimpleAuthenticationInfo(accountDto.getName(), accountDto.getPassword(),
 				ByteSource.Util.bytes(accountDto.getCredentialsSalt()), this.getName());

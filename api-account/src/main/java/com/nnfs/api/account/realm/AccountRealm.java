@@ -94,6 +94,7 @@ public class AccountRealm extends AuthorizingRealm {
 	 * 认证
 	 */
 	@Override
+	
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		UsernamePasswordToken statelessToken = (UsernamePasswordToken) token;
 		String accountName = statelessToken.getUsername();

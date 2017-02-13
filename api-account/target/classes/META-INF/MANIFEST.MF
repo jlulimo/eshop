@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Implementation-Title: api-account
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: aa
+Built-By: Administrator
 Implementation-Vendor-Id: com.nnfs.eshop
 Build-Jdk: 1.8.0_111
 Implementation-URL: http://projects.spring.io/spring-boot/api-account/

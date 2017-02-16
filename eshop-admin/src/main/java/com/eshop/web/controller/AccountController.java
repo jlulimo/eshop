@@ -10,4 +10,9 @@ public class AccountController {
 	public String home(){
 		return "/account/login";
 	}
+	
+	@RequestMapping("/register")
+	public String register(){
+		return "account/register";
+	}
 }

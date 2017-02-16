@@ -21,7 +21,7 @@ public class RegisterController {
 	@Autowired
 	private AccountService accountService;
 
-	@RequestMapping(value = "register", method = RequestMethod.POST)
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
 	public Result register(@RequestParam(value = "username") String username,
 			@RequestParam(value = "password") String password, @RequestParam(value = "confirmPwd") String confirmPwd,

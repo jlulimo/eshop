@@ -16,21 +16,12 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-<<<<<<< HEAD
 			<name>org.springframework.ide.eclipse.core.springbuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
 			<name>org.eclipse.m2e.core.maven2Builder</name>
-=======
-			<name>org.eclipse.m2e.core.maven2Builder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>org.springframework.ide.eclipse.core.springbuilder</name>
->>>>>>> branch 'master' of https://github.com/jlulimo/eshop.git
 			<arguments>
 			</arguments>
 		</buildCommand>

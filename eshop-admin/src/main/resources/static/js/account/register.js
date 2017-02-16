@@ -14,7 +14,7 @@ $(function() {
             	var confirmPwd = $('#confirmPwd').val();
 
             	$.ajax({
-            		url: constants.BASE_URL + "/register",
+            		url: constants.BASE_URL + "/doRegister",
             		type: 'POST',
             		dataType: 'json',
             		data: {username: username,

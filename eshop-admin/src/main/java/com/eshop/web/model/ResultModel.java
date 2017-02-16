@@ -1,6 +1,6 @@
 package com.eshop.web.model;
 
-public class Result {
+public class ResultModel {
 	/**
 	 * 结果码
 	 */

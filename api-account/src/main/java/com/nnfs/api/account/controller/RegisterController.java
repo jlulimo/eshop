@@ -5,15 +5,18 @@ import java.util.UUID;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.nnfs.api.account.constant.PromptMsg;
 import com.nnfs.api.account.dto.AccountDto;
 import com.nnfs.api.account.dto.Result;
+import com.nnfs.api.account.model.RegisterModel;
 import com.nnfs.api.account.service.AccountService;
 
 @Controller
@@ -21,19 +24,18 @@ public class RegisterController {
 	@Autowired
 	private AccountService accountService;
 
+	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody
-	public Result register(@RequestParam(value = "username") String username,
-			@RequestParam(value = "password") String password, @RequestParam(value = "confirmPwd") String confirmPwd,
-			@RequestParam(value = "email") String email) {
+	public Result register(@RequestBody RegisterModel registerModel) {
 		AccountDto accountDto = new AccountDto();
 		accountDto.setAccountId(UUID.randomUUID().toString());
 		accountDto.setEnable(true);
-		accountDto.setName(username);
-		accountDto.setEmail(email);
+		accountDto.setName(registerModel.getUsername());
+		accountDto.setEmail(registerModel.getEmail());
 		String salt = new SecureRandomNumberGenerator().nextBytes().toHex();
 		accountDto.setSalt(salt);
-		SimpleHash hash = new SimpleHash("md5", password, accountDto.getName() + salt, 2);
+		SimpleHash hash = new SimpleHash("md5", registerModel.getPassword(), accountDto.getName() + salt, 2);
 		String encodedPassword = hash.toHex();
 		accountDto.setPassword(encodedPassword);
 

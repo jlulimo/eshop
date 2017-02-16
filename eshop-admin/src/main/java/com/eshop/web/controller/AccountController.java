@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.eshop.web.model.LoginModel;
 import com.eshop.web.model.RegisterModel;
 import com.eshop.web.model.ResultModel;
 import com.eshop.web.util.HttpUtil;
@@ -63,21 +64,25 @@ public class AccountController {
 	@ResponseBody
 	public ResultModel doLogin(@RequestParam(value = "username") String username,
 			@RequestParam(value = "password") String password, @RequestParam(value = "rememberMe") Boolean rememberMe) {
-		RequestBody formBody = new FormBody.Builder().add("username", username).add("password", password)
-				.add("rememberMe", String.valueOf(rememberMe)).build();
-		Request request = new Request.Builder().url(HttpUtil.BASE_URL + "/login").post(formBody).build();
-		Response response;
+		ResultModel resultModel = null;
+		LoginModel loginModel = new LoginModel();
+		loginModel.setUsername(username);
+		loginModel.setPassword(password);
+		loginModel.setRememberMe(rememberMe);
+		// build a request
+		Request request = new Request.Builder().url(HttpUtil.BASE_URL + "/login")
+				.post(RequestBody.create(HttpUtil.JSON, JSON.toJSONString(loginModel))).build();
 		try {
-			response = HttpUtil.getHttpClient().newCall(request).execute();
+			Response response = HttpUtil.getHttpClient().newCall(request).execute();
 			if (response.isSuccessful()) {
 				String resp = response.body().string();
-				System.out.println(resp);
+				resultModel = JSON.parseObject(resp, ResultModel.class);
+				return resultModel;
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return resultModel;
 	}
 
 }

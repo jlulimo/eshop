@@ -8,26 +8,31 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.nnfs.api.account.constant.PromptMsg;
 import com.nnfs.api.account.dto.Result;
+import com.nnfs.api.account.model.LoginModel;
 import com.nnfs.api.account.util.Utility;
 
 @Controller
 public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-	@RequestMapping(value = "login", method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public Result Login(@RequestParam(value = "username") String username,
-			@RequestParam(value = "password") String password, @RequestParam(value = "rememberMe") Boolean rememberMe) {
+	public Result Login(@RequestBody LoginModel loginModel) {
 		Result result = new Result();
-		UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password, rememberMe);
+		UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(loginModel.getUsername(),
+				loginModel.getPassword(), loginModel.isRememberMe());
 		try {
 			SecurityUtils.getSubject().login(usernamePasswordToken);
 			String token = Utility.tokenGenerator();

@@ -85,4 +85,13 @@ public class AccountController {
 		return resultModel;
 	}
 
+	@RequestMapping(value = "/menuInfo", method = RequestMethod.GET)
+	@ResponseBody
+	public ResultModel getMenuInfo() {
+		ResultModel resultModel = new ResultModel();
+		resultModel.setCode(0);
+		resultModel.setData(5);
+		return resultModel;
+	}
+
 }

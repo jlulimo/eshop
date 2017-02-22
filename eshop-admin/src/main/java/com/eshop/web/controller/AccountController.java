@@ -1,8 +1,11 @@
 package com.eshop.web.controller;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +17,6 @@ import com.eshop.web.model.RegisterModel;
 import com.eshop.web.model.ResultModel;
 import com.eshop.web.util.HttpUtil;
 
-import okhttp3.FormBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
@@ -23,6 +25,18 @@ import okhttp3.Response;
 public class AccountController {
 
 	@RequestMapping("/")
+	String index(Model model) {
+		model.addAttribute("now", LocalDateTime.now());
+		return "index";
+	}
+
+	@GetMapping("properties")
+	@ResponseBody
+	java.util.Properties properties() {
+		return System.getProperties();
+	}
+
+	@RequestMapping("/login")
 	public String home() {
 		return "/account/login";
 	}

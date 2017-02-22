@@ -13,29 +13,27 @@ $(function(){
                   '</ul></li>',
 		init_menu:function(count){
 			for (var i = 0; i < count; i++) {
-				$('#menuList').append(menu_html);
+				$('#menuList').append(menu.menu_html);
 			}
 		},
 		init:function(){
 
-			// $.ajax({
-			// 	url: constants.BASE_URL + "/menuInfo",
-			// 	type: 'GET',
-			// })
-			// .done(function(result) {
-			// 	menu.init_menu(result);
-			// 	console.log("success");
-			// })
-			// .fail(function() {
-			// 	console.log("error");
-			// })
-			// .always(function() {
-			// 	console.log("complete");
-			// });
-			alert(1111);
+			$.ajax({
+				url: constants.BASE_URL + "/menuInfo",
+				type: 'GET',
+			})
+			.done(function(result) {
+				menu.init_menu(result.data);
+				console.log("success");
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
 			
 		}
 	};
-	// menu.init();
-	alert(123);
+	menu.init();
 });

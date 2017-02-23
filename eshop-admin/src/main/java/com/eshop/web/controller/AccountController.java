@@ -50,6 +50,8 @@ public class AccountController {
 	public String dashboard() {
 		return "account/dashboard";
 	}
+	
+	
 
 	@RequestMapping(value = "/doRegister", method = RequestMethod.POST)
 	@ResponseBody

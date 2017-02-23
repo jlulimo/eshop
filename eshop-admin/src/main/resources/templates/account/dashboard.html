@@ -4,13 +4,12 @@
       layout:decorate="~{layouts/layout}">
 
 <head>
-    <title>dashboard test</title>
+    <title>dashboard test 111</title>
 </head>
 
 <body>
     <!-- Insert content into the layouts/layout.html -->
-<th:block layout:fragment="content">
-    <div class="hero-unit" style="background-color: green">
+    <div layout:fragment="content" class="hero-unit" style="background-color: green">
         <h1>Test</h1>
         <p>
             Welcome to the Spring Boot Thymeleaf Application! The time is: <strong th:text="${#temporals.format(now, 'dd/MMM/yyyy HH:mm')}">31/12/2015 15:00</strong>
@@ -117,7 +116,6 @@
             </tbody>
         </table>
     </div>
-</th:block>
 </body>
 
 </html>

@@ -45,6 +45,11 @@ public class AccountController {
 	public String register() {
 		return "account/register";
 	}
+	
+	@RequestMapping("/dashboard")
+	public String dashboard() {
+		return "account/dashboard";
+	}
 
 	@RequestMapping(value = "/doRegister", method = RequestMethod.POST)
 	@ResponseBody

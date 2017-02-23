@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>mli</title>
+    <title>layout</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -52,29 +52,11 @@
     <div class="wrapper">
         <!-- Header -->
         <div th:replace="fragments/header :: header"></div>
+        <!-- aside -->
         <div th:replace="fragments/aside :: aside"></div>
-        <!-- <div th:replace="fragments/content-wrapper :: content-wrapper"></div> -->
-
-        <div th:fragment="content-wrapper">
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header" style="background-color: red">
-                <h1>Dashboard<small>Control panel</small></h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li class="active">Dashboard</li>
-                </ol>
-            </section>
-            <!-- Main content -->
-            <section class="content">
-                <div layout:fragment="content"></div>
-            </section>
-            <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
-    </div>
-        
+        <!-- content and bread -->
+        <div th:replace="fragments/content-wrapper :: content-wrapper"></div>
+       
     </div>
     <!-- jQuery 2.2.3 -->
     <script th:src="@{/plugins/jQuery/jquery-2.2.3.min.js}"></script>

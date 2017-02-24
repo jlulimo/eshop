@@ -4,14 +4,136 @@
 
 <head>
     <title>商品类别管理</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/treeview/bootstrap-treeview.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/product/categorymanager.css}">
-    <script th:src="@{/js/treeview/bootstrap-treeview.js}"></script>
+    <link rel="stylesheet" th:href="@{/dist/css/bootstrap-select/bootstrap-select.css}">
+    <link rel="stylesheet" th:href="@{/css/product/categorymanager.css}">
+    <script th:src="@{/dist/js/bootstrap-select/bootstrap-select.js}"></script>
     <script th:src="@{/js/product/categorymanager.js}"></script>
 </head>
 
 <body>
-    
+    <div layout:fragment="content">
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div class="btn-group">
+                    <button class="btn btn-success btn-flat">添加</button>
+                    <button class="btn btn-success btn-flat">删除</button>
+                    <button class="btn btn-success btn-flat">修改</button>
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div id="level2BtnGroup" class="btn-group">
+                    <button class="btn btn-success btn-flat">添加</button>
+                    <button class="btn btn-success btn-flat">删除</button>
+                    <button class="btn btn-success btn-flat">修改</button>
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div id="level3BtnGroup"  class="btn-group">
+                    <button class="btn btn-success btn-flat">添加</button>
+                    <button class="btn btn-success btn-flat">删除</button>
+                    <button class="btn btn-success btn-flat">修改</button>
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div id="level4BtnGroup"  class="btn-group">
+                    <button class="btn btn-success btn-flat">添加</button>
+                    <button class="btn btn-success btn-flat">删除</button>
+                    <button class="btn btn-success btn-flat">修改</button>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="height: 200px;">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div>
+                    <select id="level1" class="selectpicker" data-hide-disabled="false" data-live-search="true">
+                        <optgroup disabled="disabled" label="disabled">
+                            <option>Hidden</option>
+                        </optgroup>
+                        <optgroup label="Fruit">
+                            <option>Apple</option>
+                            <option>Orange</option>
+                        </optgroup>
+                        <optgroup label="Vegetable">
+                            <option>Corn</option>
+                            <option>Carrot</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div>
+                    <select id="level2" class="selectpicker" data-hide-disabled="false" data-live-search="true">
+                        <optgroup disabled="disabled" label="disabled">
+                            <option>Hidden</option>
+                        </optgroup>
+                        <optgroup label="Fruit">
+                            <option>Apple</option>
+                            <option>Orange</option>
+                        </optgroup>
+                        <optgroup label="Vegetable">
+                            <option>Corn</option>
+                            <option>Carrot</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div>
+                    <select id="level3" class="selectpicker" data-hide-disabled="false" data-live-search="true">
+                        <optgroup disabled="disabled" label="disabled">
+                            <option>Hidden</option>
+                        </optgroup>
+                        <optgroup label="Fruit">
+                            <option>Apple</option>
+                            <option>Orange</option>
+                        </optgroup>
+                        <optgroup label="Vegetable">
+                            <option>Corn</option>
+                            <option>Carrot</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <div>
+                    <select id="level4" class="selectpicker" data-hide-disabled="false" data-live-search="true">
+                        <optgroup disabled="disabled" label="disabled">
+                            <option>Hidden</option>
+                        </optgroup>
+                        <optgroup label="Fruit">
+                            <option>Apple</option>
+                            <option>Orange</option>
+                        </optgroup>
+                        <optgroup label="Vegetable">
+                            <option>Corn</option>
+                            <option>Carrot</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <div id="custom-search-input">
+                    <div class="input-group col-md-12">
+                        <input id="search" type="text" class="form-control input-lg" placeholder="Search" />
+                        <span class="input-group-btn">
+								<button class="btn btn-info btn-lg" type="button">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</span>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Morbi leo risus</li>
+                        <li class="list-group-item">Porta ac consectetur ac</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

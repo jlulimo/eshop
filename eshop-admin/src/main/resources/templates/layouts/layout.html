@@ -46,6 +46,8 @@
     <script th:src="@{/js/constants/constants.js}"></script>
     <script th:src="@{/js/fragments/sidebar-menu.js}"></script>
     <script th:src="@{/js/fragments/user-panel.js}"></script>
+
+    
 </head>
 
 <body class="sidebar-toggle hold-transition skin-blue sidebar-mini">
@@ -56,18 +58,13 @@
         <div th:replace="fragments/aside :: aside"></div>
         <!-- content and bread -->
         <div th:replace="fragments/content-wrapper :: content-wrapper"></div>
-       
     </div>
-    <!-- jQuery 2.2.3 -->
-    <script th:src="@{/plugins/jQuery/jquery-2.2.3.min.js}"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
     $.widget.bridge('uibutton', $.ui.button);
     </script>
-    <!-- Bootstrap 3.3.6 -->
-    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
     <!-- Morris.js charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script th:src="@{/plugins/morris/morris.min.js}"></script>

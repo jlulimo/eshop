@@ -4,15 +4,18 @@
 
 <head>
     <title>商品类别管理</title>
-    <link rel="stylesheet" th:href="@{/dist/css/bootstrap-select/bootstrap-select.css}">
+    <!-- <link rel="stylesheet" th:href="@{/dist/css/bootstrap-select/bootstrap-select.css}">
     <link rel="stylesheet" th:href="@{/css/product/categorymanager.css}">
     <script th:src="@{/dist/js/bootstrap-select/bootstrap-select.js}"></script>
-    <script th:src="@{/js/product/categorymanager.js}"></script>
+    <script th:src="@{/js/product/categorymanager.js}"></script> -->
+    <link rel="stylesheet" th:href="@{/dist/css/jstree/themes/default/style.min.css}">
+    <script th:src="@{/dist/js/jstree/jstree.min.js}"></script>
+    <script th:src=@{/js/product/categoryTree.js}></script>
 </head>
 
 <body>
     <div layout:fragment="content">
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="btn-group">
                     <button class="btn btn-success btn-flat">添加</button>
@@ -131,6 +134,11 @@
                         <li class="list-group-item">Vestibulum at eros</li>
                     </ul>
                 </div>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div id="treeview"></div>
             </div>
         </div>
     </div>

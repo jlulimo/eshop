@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>test</title>
+    <script th:src="@{/plugins/jQuery/jquery-2.2.3.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/dist/css/jstree/themes/default/style.min.css}">
+    <script th:src="@{/dist/js/jstree/jstree.min.js}"></script>
+     <!-- jQuery 2.2.3 -->
+    
+    <script th:src=@{/js/product/categoryTree.js}></script>
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.3/themes/default/style.min.css" /> -->
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.3/jstree.min.js"></script> -->
+</head>
+
+<body>
+    <div id="treeContainer">
+        <ul>
+            <li>Root node
+                <ul>
+                    <li>Child node 1</li>
+                    <li>Child node 2</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+</body>
+
+</html>

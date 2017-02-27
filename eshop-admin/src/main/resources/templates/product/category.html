@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
-<html>
 
 <head>
     <title>商品类别管理</title>
-    <!-- <link rel="stylesheet" th:href="@{/dist/css/bootstrap-select/bootstrap-select.css}">
+    <link rel="stylesheet" th:href="@{/dist/css/bootstrap-select/bootstrap-select.css}">
     <link rel="stylesheet" th:href="@{/css/product/categorymanager.css}">
     <script th:src="@{/dist/js/bootstrap-select/bootstrap-select.js}"></script>
-    <script th:src="@{/js/product/categorymanager.js}"></script> -->
+    <script th:src="@{/js/product/categorymanager.js}"></script>
     <link rel="stylesheet" th:href="@{/dist/css/jstree/themes/default/style.min.css}">
     <script th:src="@{/dist/js/jstree/jstree.min.js}"></script>
     <script th:src=@{/js/product/categoryTree.js}></script>
@@ -15,7 +14,37 @@
 
 <body>
     <div layout:fragment="content">
-        <!-- <div class="row">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="box box-default box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">类目管理</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="btn-group">
+                            <button id="createNode" class="btn btn-success btn-flat">添加</button>
+                            <button id="deleteNode" class="btn btn-success btn-flat">删除</button>
+                            <button id="editNode" class="btn btn-success btn-flat">修改</button>
+                        </div>
+                        <div id="treeview">
+                            <ul>
+                                <li>Root Example
+                                    <ul>
+                                        <li>Child Example 1</li>
+                                        <li>Child Example 2</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="treeLoading" class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <div class="btn-group">
                     <button class="btn btn-success btn-flat">添加</button>
@@ -136,12 +165,7 @@
                 </div>
             </div>
         </div> -->
-        <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <div id="treeview"></div>
-            </div>
-        </div>
-    </div>
+    <!-- </div> -->
 </body>
 
 </html>

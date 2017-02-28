@@ -1,4 +1,4 @@
-package com.eshop.product.controller;
+package com.eshop.api.product.controller;
 
 import java.util.UUID;
 
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.eshop.product.constants.PromptMsg;
-import com.eshop.product.model.CategoryNode;
-import com.eshop.product.model.ResultModel;
+import com.eshop.api.product.constants.PromptMsg;
+import com.eshop.api.product.model.CategoryNode;
+import com.eshop.api.product.model.ResultModel;
 
 @Controller
 public class ProductController {

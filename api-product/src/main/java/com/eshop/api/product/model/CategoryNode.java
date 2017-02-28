@@ -1,4 +1,4 @@
-package com.eshop.product.model;
+package com.eshop.api.product.model;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.eshop.product.domain;
+package com.eshop.api.product.domain;
 
 public class Property {
 	private String id;

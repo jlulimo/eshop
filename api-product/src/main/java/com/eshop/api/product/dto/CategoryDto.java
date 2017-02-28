@@ -1,4 +1,4 @@
-package com.eshop.product.dto;
+package com.eshop.api.product.dto;
 
 public class CategoryDto {
 	private String id;

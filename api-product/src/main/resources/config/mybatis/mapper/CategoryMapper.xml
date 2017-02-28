@@ -24,7 +24,7 @@
 	</select>
 
 	<insert id="create" parameterType="Category">
-		insert into t_category (CategoryId,name,password,salt,email,type,enable,deleted,locked) values (#{CategoryId},#{name},#{password},#{salt},#{email},#{type},#{enable},#{deleted},#{locked})
+		insert into t_category (id,category_id,parent_id,name,category_no) values (#{id},#{categoryId},#{parent	Id},#{name},#{cno})
 	</insert>
 
 	<update id="update" parameterType="Category">

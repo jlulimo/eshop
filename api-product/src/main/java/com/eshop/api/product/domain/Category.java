@@ -5,7 +5,7 @@ public class Category {
 	private String cid;
 	private String parentId;
 	private String name;
-	private String cNo;
+	private String cno;
 
 	public long getId() {
 		return id;
@@ -39,12 +39,12 @@ public class Category {
 		this.name = name;
 	}
 
-	public String getcNo() {
-		return cNo;
+	public String getCno() {
+		return cno;
 	}
 
-	public void setcNo(String cNo) {
-		this.cNo = cNo;
+	public void setCno(String cno) {
+		this.cno = cno;
 	}
 
 }

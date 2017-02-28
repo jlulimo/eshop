@@ -1,4 +1,4 @@
-package com.eshop.web.constants;
+package com.eshop.product.constants;
 
 public enum PromptMsg {
 	SUCCESS(0, "请求成功"), ACCOUNT_NOT_EXIST(100, "用户不存在."), ACCOUNT_LOCKED(101, "账号被锁定."), LOGIN_ERROR(102,

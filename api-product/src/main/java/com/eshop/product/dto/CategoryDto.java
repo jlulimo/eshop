@@ -1,6 +1,6 @@
-package com.eshop.domain;
+package com.eshop.product.dto;
 
-public class Category {
+public class CategoryDto {
 	private String id;
 	private String parentId;
 	private String name;

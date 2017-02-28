@@ -67,7 +67,7 @@ public class AccountController {
 
 		// build a request
 		Request request = new Request.Builder().url(HttpUtil.BASE_URL + "/register")
-				.post(RequestBody.create(HttpUtil.JSON, JSON.toJSONString(registerModel))).build();
+				.post(RequestBody.create(HttpUtil.JSON_TYPE, JSON.toJSONString(registerModel))).build();
 		try {
 			Response response = HttpUtil.getHttpClient().newCall(request).execute();
 			if (response.isSuccessful()) {
@@ -92,7 +92,7 @@ public class AccountController {
 		loginModel.setRememberMe(rememberMe);
 		// build a request
 		Request request = new Request.Builder().url(HttpUtil.BASE_URL + "/login")
-				.post(RequestBody.create(HttpUtil.JSON, JSON.toJSONString(loginModel))).build();
+				.post(RequestBody.create(HttpUtil.JSON_TYPE, JSON.toJSONString(loginModel))).build();
 		try {
 			Response response = HttpUtil.getHttpClient().newCall(request).execute();
 			if (response.isSuccessful()) {

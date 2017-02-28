@@ -1,4 +1,4 @@
-package com.eshop.domain;
+package com.eshop.product.domain;
 
 public class SPU {
 	private String id;

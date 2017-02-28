@@ -1,9 +1,9 @@
-package com.eshop.domain;
+package com.eshop.product.domain;
 
-public class Property {
+public class Brand {
 	private String id;
 	private String name;
-	private String cid;
+	private String brandNo;
 
 	public String getId() {
 		return id;
@@ -21,12 +21,12 @@ public class Property {
 		this.name = name;
 	}
 
-	public String getCid() {
-		return cid;
+	public String getBrandNo() {
+		return brandNo;
 	}
 
-	public void setCid(String cid) {
-		this.cid = cid;
+	public void setBrandNo(String brandNo) {
+		this.brandNo = brandNo;
 	}
 
 }

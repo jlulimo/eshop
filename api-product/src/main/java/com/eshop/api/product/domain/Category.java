@@ -1,17 +1,26 @@
 package com.eshop.api.product.domain;
 
 public class Category {
-	private String id;
+	private long id;
+	private String cid;
 	private String parentId;
 	private String name;
 	private String cNo;
 
-	public String getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getCid() {
+		return cid;
+	}
+
+	public void setCid(String cid) {
+		this.cid = cid;
 	}
 
 	public String getParentId() {

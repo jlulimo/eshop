@@ -1,6 +1,6 @@
-drop database if exists account_db;
-create database account_db;
-use account_db;
+drop database if exists eshop;
+create database eshop;
+use eshop;
 
 drop table if exists t_account;
 drop table if exists t_group;

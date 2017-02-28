@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.nnfs.api.Category.mapper.CategoryMapper">
+<mapper namespace="com.nnfs.api.product.mapper.CategoryMapper">
 	<select id="get" parameterType="long" resultType="Category">
 		select * from t_category where id = #{id}
 	</select>

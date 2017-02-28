@@ -34,6 +34,7 @@ public class ProductController {
 		} else {
 			categoryNode.setId(UUID.randomUUID().toString());
 			categoryNode.setType("category");
+			
 		}
 		return resultModel;
 	}

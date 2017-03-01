@@ -1,8 +1,5 @@
 package com.eshop.web.controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
@@ -15,24 +12,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.alibaba.fastjson.JSON;
 import com.eshop.web.constants.PromptMsg;
 import com.eshop.web.model.CategoryNode;
 import com.eshop.web.model.ResultModel;
 import com.eshop.web.util.HttpUtil;
 
-import okhttp3.Request;
-import okhttp3.Response;
-
 @Controller
 @RequestMapping(value = "product")
 public class ProductController {
-	
+
 	@RequestMapping(value = "layout", method = RequestMethod.GET)
 	public String layout() {
 		return "/layouts/layout";
 	}
-	
+
 	@RequestMapping(value = "test", method = RequestMethod.GET)
 	public String test() {
 		return "/product/test";
@@ -57,36 +50,40 @@ public class ProductController {
 			result.setCode(PromptMsg.QUERY_FAILED.getCode());
 			result.setMsg("节点id为空");
 			return result;
-		}
-		if ("root".equalsIgnoreCase(nodeId)) {
-			CategoryNode tree = this.assembleTree();
-			result.setCode(PromptMsg.SUCCESS.getCode());
-			result.setData(tree);
-			return result;
+		} else {
+			ResultModel apiResult = HttpUtil.exectRequest(ResultModel.class, nodeId, "/category/browse");
+			if (apiResult.getCode() == PromptMsg.SUCCESS.getCode()) {
+				result.setCode(apiResult.getCode());
+				result.setData(apiResult.getData());
+				result.setExtendData(apiResult.getExtendData());
+			} else {
+				result.setCode(PromptMsg.QUERY_FAILED.getCode());
+				result.setMsg(PromptMsg.QUERY_FAILED.getMsg());
+			}
 		}
 		return result;
 	}
 
-	private CategoryNode assembleTree() {
-		CategoryNode rootNode = new CategoryNode();
-		rootNode.setId("root");
-		rootNode.setText("商品类别管理");
-		rootNode.setType("root");
-		// todo getchildren..
-		CategoryNode c1 = new CategoryNode();
-		c1.setId("c1");
-		c1.setText("类别1");
-		c1.setType("category");
-		CategoryNode c2 = new CategoryNode();
-		c2.setId("c2");
-		c2.setText("类别2");
-		c2.setType("category");
-		List<CategoryNode> children = new ArrayList<>();
-		children.add(c1);
-		children.add(c2);
-		rootNode.setChildren(children);
-		return rootNode;
-	}
+	// private CategoryNode assembleTree() {
+	//// CategoryNode rootNode = new CategoryNode();
+	//// rootNode.setId("root");
+	//// rootNode.setText("商品类别管理");
+	//// rootNode.setType("root");
+	//// // todo getchildren..
+	//// CategoryNode c1 = new CategoryNode();
+	//// c1.setId("c1");
+	//// c1.setText("类别1");
+	//// c1.setType("category");
+	//// CategoryNode c2 = new CategoryNode();
+	//// c2.setId("c2");
+	//// c2.setText("类别2");
+	//// c2.setType("category");
+	//// List<CategoryNode> children = new ArrayList<>();
+	//// children.add(c1);
+	//// children.add(c2);
+	//// rootNode.setChildren(children);
+	//// return rootNode;
+	// }
 
 	@ResponseStatus(value = HttpStatus.OK)
 	@RequestMapping(value = "addCategory", method = RequestMethod.POST)
@@ -104,7 +101,7 @@ public class ProductController {
 			resultModel.setMsg("父节点ID为空");
 		} else {
 			categoryNode.setId(UUID.randomUUID().toString());
-			categoryNode.setType("category");
+//			categoryNode.setType("category");
 			resultModel = HttpUtil.exectRequest(resultModel.getClass(), categoryNode, "/addCategory");
 		}
 		return resultModel;
@@ -125,15 +122,15 @@ public class ProductController {
 			resultModel.setCode(PromptMsg.EDIT_FAILED.getCode());
 			resultModel.setMsg("节点ID为空");
 		} else {
-			 resultModel = HttpUtil.exectRequest(resultModel.getClass(), categoryNode, "/renameCategory");
+			resultModel = HttpUtil.exectRequest(resultModel.getClass(), categoryNode, "/renameCategory");
 		}
 		return resultModel;
 	}
-	
+
 	@ResponseStatus(value = HttpStatus.OK)
 	@RequestMapping(value = "deleteCategory", method = RequestMethod.POST)
 	@ResponseBody
-	public ResultModel delCategoryNode(@RequestBody CategoryNode categoryNode){
+	public ResultModel delCategoryNode(@RequestBody CategoryNode categoryNode) {
 		ResultModel resultModel = new ResultModel();
 		if (null == categoryNode) {
 			resultModel.setCode(PromptMsg.DEL_FAILED.getCode());
@@ -146,5 +143,5 @@ public class ProductController {
 		}
 		return resultModel;
 	}
-	
+
 }

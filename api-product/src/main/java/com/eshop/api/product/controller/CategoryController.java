@@ -1,5 +1,7 @@
 package com.eshop.api.product.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -18,13 +21,26 @@ import com.eshop.api.product.model.CategoryNode;
 import com.eshop.api.product.model.ResultModel;
 import com.eshop.api.product.service.CategoryService;
 
-public class ProductController extends BaseController<CategoryNode,CategoryDto> {
-	
+@Controller
+public class CategoryController extends BaseController<CategoryNode, CategoryDto> {
 	@Autowired
 	private CategoryService categoryService;
-	
+
 	@ResponseStatus(value = HttpStatus.OK)
-	@RequestMapping(value = "addCategory", method = RequestMethod.POST)
+	@RequestMapping(value = "/category/browse", method = RequestMethod.GET)
+	@ResponseBody
+	public ResultModel browse(@RequestParam(value = "pid") String pid) {
+		List<CategoryNode> models = new ArrayList<>();
+		List<CategoryDto> children = categoryService.getChildrenByParentId(pid);
+		children.forEach(dto -> models.add(this.convertToModel(dto)));
+		ResultModel resultModel = new ResultModel();
+		resultModel.setCode(PromptMsg.SUCCESS.getCode());
+		resultModel.setData(models);
+		return resultModel;
+	}
+
+	@ResponseStatus(value = HttpStatus.OK)
+	@RequestMapping(value = "/category/add", method = RequestMethod.POST)
 	@ResponseBody
 	public ResultModel addCategory(@RequestBody CategoryNode categoryNode) {
 		ResultModel resultModel = new ResultModel();
@@ -39,14 +55,15 @@ public class ProductController extends BaseController<CategoryNode,CategoryDto> 
 			resultModel.setMsg("父节点ID为空");
 		} else {
 			categoryNode.setId(UUID.randomUUID().toString());
-			categoryNode.setType("category");
-//			categoryService.add(categoryNode);
+			categoryNode.setType(categoryNode.getType());
+			CategoryDto dto = this.convertToDto(categoryNode);
+			categoryService.add(dto);
 		}
 		return resultModel;
 	}
 
 	@ResponseStatus(value = HttpStatus.OK)
-	@RequestMapping(value = "renameCategory", method = RequestMethod.POST)
+	@RequestMapping(value = "edit", method = RequestMethod.POST)
 	@ResponseBody
 	public ResultModel renameCategory(@RequestBody CategoryNode categoryNode) {
 		ResultModel resultModel = new ResultModel();
@@ -65,7 +82,7 @@ public class ProductController extends BaseController<CategoryNode,CategoryDto> 
 	}
 
 	@ResponseStatus(value = HttpStatus.OK)
-	@RequestMapping(value = "deleteCategory", method = RequestMethod.POST)
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	@ResponseBody
 	public ResultModel delCategoryNode(@RequestBody CategoryNode categoryNode) {
 		ResultModel resultModel = new ResultModel();
@@ -84,14 +101,27 @@ public class ProductController extends BaseController<CategoryNode,CategoryDto> 
 
 	@Override
 	public CategoryDto convertToDto(CategoryNode d) {
-		// TODO Auto-generated method stub
-		return null;
+		if (null == d) {
+			return null;
+		}
+		CategoryDto dto = new CategoryDto();
+		dto.setName(d.getText());
+		dto.setParentId(d.getParentId());
+		dto.setType(d.getType());
+		dto.setLevel(d.getLevel());
+		return dto;
 	}
 
 	@Override
 	public CategoryNode convertToModel(CategoryDto t) {
-		// TODO Auto-generated method stub
-		return null;
+		CategoryNode model = new CategoryNode();
+		model.setId(t.getCid());
+		model.setType(t.getType());
+		model.setText(t.getName());
+		model.setParentId(t.getParentId());
+		model.setType(t.getType());
+		model.setLevel(t.getLevel());
+		return model;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.eshop.api.product.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -34,6 +36,11 @@ public class CategoryDaoImpl extends GenericDaoImpl<Category> implements Categor
 	@Override
 	public Category getByCategoryId(String categoryId) {
 		return categoryMapper.getByCategoryId(categoryId);
+	}
+
+	@Override
+	public List<Category> getChildrenByParentId(String pid) {
+		return categoryMapper.getChildrenByParentId(pid);
 	}
 
 }

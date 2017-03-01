@@ -8,7 +8,9 @@ create table t_category (
   category_id varchar(100),
   parent_id varchar(100),
   name varchar(100),
-  category_no varchar(100)
+  category_no varchar(100),
+  type int,
+  level int,
   constraint pk_t_category primary key(id)
 ) charset=utf8 ENGINE=InnoDB;
 create unique index idx_name on t_category(name);

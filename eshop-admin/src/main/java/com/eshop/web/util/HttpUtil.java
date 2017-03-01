@@ -3,11 +3,13 @@ package com.eshop.web.util;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import com.alibaba.fastjson.JSON;
 import com.eshop.web.model.ResultModel;
 
+import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -43,6 +45,27 @@ public class HttpUtil {
 		// build a request
 		Request request = new Request.Builder().url(HttpUtil.BASE_URL + relativelyUrl)
 				.post(RequestBody.create(HttpUtil.JSON_TYPE, JSON.toJSONString(object))).build();
+		try {
+			Response response = HttpUtil.getHttpClient().newCall(request).execute();
+			if (response.isSuccessful()) {
+				String resp = response.body().string();
+				t = JSON.parseObject(resp, tClass);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return t;
+	}
+	
+	public static <T> T exectGetRequest(Class<T> tClass, Object object, String relativelyUrl,Map<String, String> param) {
+		T t = null;
+		HttpUrl.Builder urlBuilder = HttpUrl.parse(HttpUtil.BASE_URL + relativelyUrl).newBuilder();
+		for (Map.Entry<String, String> kvp : param.entrySet()) {
+			urlBuilder.addQueryParameter(kvp.getKey(), kvp.getValue());
+			urlBuilder.addQueryParameter(kvp.getKey(), kvp.getValue());
+		}
+		String url = urlBuilder.build().toString();
+		Request request = new Request.Builder().url(url).build();
 		try {
 			Response response = HttpUtil.getHttpClient().newCall(request).execute();
 			if (response.isSuccessful()) {

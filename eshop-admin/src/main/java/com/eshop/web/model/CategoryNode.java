@@ -6,8 +6,17 @@ public class CategoryNode {
 	private String id;
 	private String text;
 	private List<CategoryNode> children;
-	private String type;
+	private int type;
+	private int level;
 	private String parentId;
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
 
 	public String getParentId() {
 		return parentId;
@@ -17,11 +26,11 @@ public class CategoryNode {
 		this.parentId = parentId;
 	}
 
-	public String getType() {
+	public int getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 

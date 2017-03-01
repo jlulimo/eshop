@@ -2,9 +2,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.nnfs.api.product.mapper.CategoryMapper">
+<mapper namespace="com.eshop.api.product.mapper.CategoryMapper">
 	<select id="get" parameterType="long" resultType="Category">
 		select * from t_category where id = #{id}
+	</select>
+	
+	<select id="getChildrenByParentId" parameterType="String" resultType="Category">
+		select * from t_category where parent_id = #{pid}
 	</select>
 	
 	<select id="getByCategoryId" parameterType="String" resultType="Category">
@@ -24,7 +28,7 @@
 	</select>
 
 	<insert id="create" parameterType="Category">
-		insert into t_category (id,category_id,parent_id,name,category_no) values (#{id},#{categoryId},#{parent	Id},#{name},#{cno})
+		insert into t_category (id,category_id,parent_id,name,category_no,type,level) values (#{id},#{categoryId},#{parent	Id},#{name},#{cno},#{type},#{level})
 	</insert>
 
 	<update id="update" parameterType="Category">
@@ -37,34 +41,5 @@
 	<delete id="delete" parameterType="long">
 		delete from t_category where id = #{id}
 	</delete>
-	
-	<!-- Category - role  -->
-	<resultMap type="Category" id="CategoryResultMap">
-		<id column="id" property="id"/>
-		<result column="CategoryId" property="CategoryId"/>
-		<result column="type" property="type"/>
-		<result column="name" property="name"/>
-		<result column="password" property="password"/>
-		<result column="salt" property="salt"/>
-		<result column="deleted" property="deleted"/>
-		<result column="locked" property="locked"/> 
-		<result column="enable" property="enable"/>
-		<collection property="roles" ofType="Role">
-			<id column="id"  property="id"/>
-			<result column="name" property="name"/>
-			<result column="type" property="type"/>
-		</collection>
-		<collection property="groups" ofType="Group">
-			<id column="id" property="id"/>
-			<result column="name" property="name"/>
-			<result column="type" property="type"/>
-			<collection property="roles" ofType="Role">
-				<id column="id" property="id"/>
-				<result column="name" property="name"/>
-				<result column="type" property="type"/>
-			</collection>
-		</collection>
-	</resultMap>
-	
 	
 </mapper>

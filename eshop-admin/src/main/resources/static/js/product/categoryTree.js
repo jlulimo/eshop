@@ -28,6 +28,7 @@ $(function() {
                                 }),
                             })
                             .done(function(result) {
+                                $('#treeview').jstree(true).refresh('#'+result.data.parentId);
                                 console.log("success");
                                 alert(result.data);
                             })

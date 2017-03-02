@@ -58,6 +58,8 @@ public class CategoryController extends BaseController<CategoryNode, CategoryDto
 			categoryNode.setType(categoryNode.getType());
 			CategoryDto dto = this.convertToDto(categoryNode);
 			categoryService.add(dto);
+			resultModel.setCode(PromptMsg.SUCCESS.getCode());
+			resultModel.setData(dto.getParentId());
 		}
 		return resultModel;
 	}

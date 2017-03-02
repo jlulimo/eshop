@@ -8,7 +8,7 @@
 	</select>
 	
 	<select id="getChildrenByParentId" parameterType="String" resultType="Category">
-		select * from t_category where parent_id = #{pid}
+		select category_id as cid,parent_id as parentId, name,type,level from t_category where parent_id = #{pid}
 	</select>
 	
 	<select id="getByCategoryId" parameterType="String" resultType="Category">

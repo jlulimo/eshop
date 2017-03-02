@@ -1,5 +1,8 @@
 package com.eshop.web.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
@@ -51,11 +54,18 @@ public class ProductController {
 			result.setMsg("节点id为空");
 			return result;
 		} else {
-			ResultModel apiResult = HttpUtil.exectRequest(ResultModel.class, nodeId, "/category/browse");
+			Map<String, String> parm = new HashMap<>();
+			parm.put("pid", nodeId);
+			ResultModel apiResult = HttpUtil.exectGet(ResultModel.class, "/category/browse", parm);
 			if (apiResult.getCode() == PromptMsg.SUCCESS.getCode()) {
-				result.setCode(apiResult.getCode());
-				result.setData(apiResult.getData());
-				result.setExtendData(apiResult.getExtendData());
+				CategoryNode root = new CategoryNode();
+				root.setChildren((List<CategoryNode>) apiResult.getData());
+				root.setId("root");
+				root.setLevel(-1);
+				root.setText("产品类别管理");
+				root.setType("root");
+				result.setCode(PromptMsg.SUCCESS.getCode());
+				result.setData(root);
 			} else {
 				result.setCode(PromptMsg.QUERY_FAILED.getCode());
 				result.setMsg(PromptMsg.QUERY_FAILED.getMsg());
@@ -101,8 +111,8 @@ public class ProductController {
 			resultModel.setMsg("父节点ID为空");
 		} else {
 			categoryNode.setId(UUID.randomUUID().toString());
-//			categoryNode.setType("category");
-			resultModel = HttpUtil.exectRequest(resultModel.getClass(), categoryNode, "/addCategory");
+			// categoryNode.setType("category");
+			resultModel = HttpUtil.exectPost(resultModel.getClass(), categoryNode, "/category/add");
 		}
 		return resultModel;
 	}
@@ -122,7 +132,7 @@ public class ProductController {
 			resultModel.setCode(PromptMsg.EDIT_FAILED.getCode());
 			resultModel.setMsg("节点ID为空");
 		} else {
-			resultModel = HttpUtil.exectRequest(resultModel.getClass(), categoryNode, "/renameCategory");
+			resultModel = HttpUtil.exectPost(resultModel.getClass(), categoryNode, "/renameCategory");
 		}
 		return resultModel;
 	}
@@ -139,7 +149,7 @@ public class ProductController {
 			resultModel.setCode(PromptMsg.DEL_FAILED.getCode());
 			resultModel.setMsg("节点ID为空");
 		} else {
-			resultModel = HttpUtil.exectRequest(resultModel.getClass(), categoryNode, "/delCategory");
+			resultModel = HttpUtil.exectPost(resultModel.getClass(), categoryNode, "/delCategory");
 		}
 		return resultModel;
 	}

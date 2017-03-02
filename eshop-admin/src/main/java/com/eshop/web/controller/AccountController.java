@@ -66,7 +66,7 @@ public class AccountController {
 		registerModel.setEmail(email);
 
 		// build a request
-		Request request = new Request.Builder().url(HttpUtil.BASE_URL + "/register")
+		Request request = new Request.Builder().url(HttpUtil.ACCOUNT_BASE_URL + "/register")
 				.post(RequestBody.create(HttpUtil.JSON_TYPE, JSON.toJSONString(registerModel))).build();
 		try {
 			Response response = HttpUtil.getHttpClient().newCall(request).execute();
@@ -91,7 +91,7 @@ public class AccountController {
 		loginModel.setPassword(password);
 		loginModel.setRememberMe(rememberMe);
 		// build a request
-		Request request = new Request.Builder().url(HttpUtil.BASE_URL + "/login")
+		Request request = new Request.Builder().url(HttpUtil.ACCOUNT_BASE_URL + "/login")
 				.post(RequestBody.create(HttpUtil.JSON_TYPE, JSON.toJSONString(loginModel))).build();
 		try {
 			Response response = HttpUtil.getHttpClient().newCall(request).execute();

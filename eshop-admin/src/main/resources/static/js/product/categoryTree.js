@@ -18,13 +18,14 @@ $(function() {
                     ref.edit(sel, null, function(node, status) {
                         $('#treeLoading').show();
                         $.ajax({
+                                contentType: "application/json; charset=utf-8",
                                 url: constants.BASE_URL + '/product/addCategory',
                                 type: 'POST',
                                 dataType: 'json',
-                                data: {
+                                data: JSON.stringify({
                                     text: node.text,
                                     parentId: node.parent,
-                                },
+                                }),
                             })
                             .done(function(result) {
                                 console.log("success");
@@ -112,6 +113,7 @@ $(function() {
                     }
                 },
                 "types": {
+                    "0": { "icon": "glyphicon glyphicon-cloud" },
                     "root": { "icon": "glyphicon glyphicon-cloud" },
                     "category": { "icon": "glyphicon glyphicon-file" }
                 },

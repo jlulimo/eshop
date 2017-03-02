@@ -2,7 +2,9 @@ package com.eshop.api.product.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,9 @@ public class CategoryServiceImpl extends GenericServiceImpl<CategoryDto, Categor
 			return null;
 		}
 		Category domain = new Category();
-		domain.setCid(t.getCid());
+		if (StringUtils.isEmpty(t.getCid())) {
+			domain.setCid(UUID.randomUUID().toString());
+		}
 		domain.setCno(t.getcNo());
 		domain.setName(t.getName());
 		domain.setParentId(t.getParentId());
@@ -41,6 +45,8 @@ public class CategoryServiceImpl extends GenericServiceImpl<CategoryDto, Categor
 		dto.setId(d.getId());
 		dto.setName(d.getName());
 		dto.setParentId(d.getParentId());
+		dto.setType(d.getType());
+		dto.setLevel(d.getLevel());
 		return dto;
 	}
 

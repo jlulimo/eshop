@@ -50,7 +50,7 @@ public class CategoryController extends BaseController<CategoryNode, CategoryDto
 		} else if (StringUtils.isEmpty(categoryNode.getText())) {
 			resultModel.setCode(PromptMsg.ADD_FAILED.getCode());
 			resultModel.setMsg("节点名字为空");
-		} else if (StringUtils.isEmpty(categoryNode.getParentId())) {
+		} else if (StringUtils.isEmpty(categoryNode.getParent())) {
 			resultModel.setCode(PromptMsg.ADD_FAILED.getCode());
 			resultModel.setMsg("父节点ID为空");
 		} else {
@@ -108,7 +108,7 @@ public class CategoryController extends BaseController<CategoryNode, CategoryDto
 		}
 		CategoryDto dto = new CategoryDto();
 		dto.setName(d.getText());
-		dto.setParentId(d.getParentId());
+		dto.setParentId(d.getParent());
 		dto.setType(d.getType());
 		dto.setLevel(d.getLevel());
 		return dto;
@@ -120,9 +120,10 @@ public class CategoryController extends BaseController<CategoryNode, CategoryDto
 		model.setId(t.getCid());
 		model.setType(t.getType());
 		model.setText(t.getName());
-		model.setParentId(t.getParentId());
+		model.setParent(t.getParentId());
 		model.setType(t.getType());
 		model.setLevel(t.getLevel());
+		model.setChildren(true);
 		return model;
 	}
 

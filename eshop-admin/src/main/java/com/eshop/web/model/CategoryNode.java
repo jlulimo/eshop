@@ -1,14 +1,12 @@
 package com.eshop.web.model;
 
-import java.util.List;
-
 public class CategoryNode {
 	private String id;
 	private String text;
-	private List<CategoryNode> children;
+	private boolean children;
 	private String type;
 	private int level;
-	private String parentId;
+	private String parent;
 
 	public int getLevel() {
 		return level;
@@ -16,14 +14,6 @@ public class CategoryNode {
 
 	public void setLevel(int level) {
 		this.level = level;
-	}
-
-	public String getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
 	}
 
 	public String getType() {
@@ -50,12 +40,19 @@ public class CategoryNode {
 		this.text = text;
 	}
 
-	public List<CategoryNode> getChildren() {
+	public boolean isChildren() {
 		return children;
 	}
 
-	public void setChildren(List<CategoryNode> children) {
+	public void setChildren(boolean children) {
 		this.children = children;
 	}
 
+	public String getParent() {
+		return parent;
+	}
+
+	public void setParent(String parent) {
+		this.parent = parent;
+	}
 }

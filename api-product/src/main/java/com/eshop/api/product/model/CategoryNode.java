@@ -1,39 +1,12 @@
 package com.eshop.api.product.model;
 
-import java.util.List;
-
 public class CategoryNode {
 	private String id;
+	private String parent;
 	private String text;
-	private List<CategoryNode> children;
 	private int type;
 	private int level;
-
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
-	}
-
-	private String parentId;
-
-	public String getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
-	}
-
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
-	}
+	private boolean children;
 
 	public String getId() {
 		return id;
@@ -41,6 +14,14 @@ public class CategoryNode {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getParent() {
+		return parent;
+	}
+
+	public void setParent(String parent) {
+		this.parent = parent;
 	}
 
 	public String getText() {
@@ -51,11 +32,27 @@ public class CategoryNode {
 		this.text = text;
 	}
 
-	public List<CategoryNode> getChildren() {
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public boolean isChildren() {
 		return children;
 	}
 
-	public void setChildren(List<CategoryNode> children) {
+	public void setChildren(boolean children) {
 		this.children = children;
 	}
 

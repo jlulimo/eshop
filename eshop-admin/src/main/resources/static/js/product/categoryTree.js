@@ -24,11 +24,11 @@ $(function() {
                                 dataType: 'json',
                                 data: JSON.stringify({
                                     text: node.text,
-                                    parentId: node.parent,
+                                    parent: node.parent,
                                 }),
                             })
                             .done(function(result) {
-                                $('#treeview').jstree(true).refresh('#'+result.data.parentId);
+                                $('#treeview').jstree(true).refresh('#'+result.data);
                                 console.log("success");
                                 alert(result.data);
                             })
@@ -98,7 +98,7 @@ $(function() {
                                 url: 'http://localhost:8080/product/browse?',
                                 type: 'GET',
                                 dataType: 'json',
-                                data: { nodeId: 'root' },
+                                data: { nodeId: obj.id },
                             })
                             .done(function(result) {
                                 console.log("success");

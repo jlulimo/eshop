@@ -53,19 +53,24 @@ public class ProductController {
 			result.setCode(PromptMsg.QUERY_FAILED.getCode());
 			result.setMsg("节点id为空");
 			return result;
-		} else {
+		} else if ("#".equalsIgnoreCase(nodeId)) {
+			CategoryNode root = new CategoryNode();
+			root.setChildren(true);
+			root.setId("root");
+			root.setParent("#");
+			root.setLevel(-1);
+			root.setText("产品类别管理");
+			root.setType("root");
+			result.setCode(PromptMsg.SUCCESS.getCode());
+			result.setData(root);
+		} 
+		else {
 			Map<String, String> parm = new HashMap<>();
 			parm.put("pid", nodeId);
 			ResultModel apiResult = HttpUtil.exectGet(ResultModel.class, "/category/browse", parm);
 			if (apiResult.getCode() == PromptMsg.SUCCESS.getCode()) {
-				CategoryNode root = new CategoryNode();
-				root.setChildren((List<CategoryNode>) apiResult.getData());
-				root.setId("root");
-				root.setLevel(-1);
-				root.setText("产品类别管理");
-				root.setType("root");
 				result.setCode(PromptMsg.SUCCESS.getCode());
-				result.setData(root);
+				result.setData(apiResult.getData());
 			} else {
 				result.setCode(PromptMsg.QUERY_FAILED.getCode());
 				result.setMsg(PromptMsg.QUERY_FAILED.getMsg());
@@ -106,7 +111,7 @@ public class ProductController {
 		} else if (StringUtils.isEmpty(categoryNode.getText())) {
 			resultModel.setCode(PromptMsg.ADD_FAILED.getCode());
 			resultModel.setMsg("节点名字为空");
-		} else if (StringUtils.isEmpty(categoryNode.getParentId())) {
+		} else if (StringUtils.isEmpty(categoryNode.getParent())) {
 			resultModel.setCode(PromptMsg.ADD_FAILED.getCode());
 			resultModel.setMsg("父节点ID为空");
 		} else {

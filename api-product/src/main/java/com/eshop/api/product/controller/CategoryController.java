@@ -22,12 +22,13 @@ import com.eshop.api.product.model.ResultModel;
 import com.eshop.api.product.service.CategoryService;
 
 @Controller
+@RequestMapping(value = "category")
 public class CategoryController extends BaseController<CategoryNode, CategoryDto> {
 	@Autowired
 	private CategoryService categoryService;
 
 	@ResponseStatus(value = HttpStatus.OK)
-	@RequestMapping(value = "/category/browse", method = RequestMethod.GET)
+	@RequestMapping(value = "browse", method = RequestMethod.GET)
 	@ResponseBody
 	public ResultModel browse(@RequestParam(value = "pid") String pid) {
 		List<CategoryNode> models = new ArrayList<>();
@@ -40,7 +41,7 @@ public class CategoryController extends BaseController<CategoryNode, CategoryDto
 	}
 
 	@ResponseStatus(value = HttpStatus.OK)
-	@RequestMapping(value = "/category/add", method = RequestMethod.POST)
+	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@ResponseBody
 	public ResultModel addCategory(@RequestBody CategoryNode categoryNode) {
 		ResultModel resultModel = new ResultModel();
@@ -54,12 +55,9 @@ public class CategoryController extends BaseController<CategoryNode, CategoryDto
 			resultModel.setCode(PromptMsg.ADD_FAILED.getCode());
 			resultModel.setMsg("父节点ID为空");
 		} else {
-			categoryNode.setId(UUID.randomUUID().toString());
-			categoryNode.setType(categoryNode.getType());
-			CategoryDto dto = this.convertToDto(categoryNode);
-			categoryService.add(dto);
+			String categoryId = categoryService.addCategory(this.convertToDto(categoryNode));
 			resultModel.setCode(PromptMsg.SUCCESS.getCode());
-			resultModel.setData(dto.getParentId());
+			resultModel.setData(categoryId);
 		}
 		return resultModel;
 	}

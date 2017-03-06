@@ -58,7 +58,7 @@ public class CategoryController extends BaseController<CategoryNode, CategoryDto
 			if (!StringUtils.isEmpty(categoryId)) {
 				resultModel.setCode(PromptMsg.SUCCESS.getCode());
 				resultModel.setData(categoryNode.getParent());
-			}else{
+			} else {
 				resultModel.setCode(PromptMsg.ADD_FAILED.getCode());
 				resultModel.setMsg("category name existed.");
 			}
@@ -85,7 +85,7 @@ public class CategoryController extends BaseController<CategoryNode, CategoryDto
 			if (!StringUtils.isEmpty(categoryId)) {
 				resultModel.setCode(PromptMsg.SUCCESS.getCode());
 				resultModel.setData(categoryNode.getParent());
-			}else{
+			} else {
 				resultModel.setCode(PromptMsg.EDIT_FAILED.getCode());
 				resultModel.setMsg("category name existed.");
 			}
@@ -105,8 +105,13 @@ public class CategoryController extends BaseController<CategoryNode, CategoryDto
 			resultModel.setCode(PromptMsg.DEL_FAILED.getCode());
 			resultModel.setMsg("节点ID为空");
 		} else {
-			// resultModel = HttpUtil.exectRequest(resultModel.getClass(),
-			// categoryNode, "/delCategory");
+			try {
+				this.categoryService.deleteCategoryById(categoryNode.getId());
+				resultModel.setCode(PromptMsg.SUCCESS.getCode());
+				resultModel.setData(categoryNode.getParent());
+			} catch (Exception e) {
+				resultModel.setCode(PromptMsg.DEL_FAILED.getCode());
+			}
 		}
 		return resultModel;
 	}

@@ -5,11 +5,13 @@ import java.util.List;
 import com.eshop.api.product.domain.Category;
 
 public interface CategoryDao extends GenericDao<Category> {
-	public int count();
+	 int count();
 
-	public Category getCategoryByName(String cName);
+	 Category getCategoryByName(String cName);
 
-	public Category getByCategoryId(String cid);
+	 Category getByCategoryId(String cid);
 
-	public List<Category> getChildrenByParentId(String pid);
+	 List<Category> getChildrenByParentId(String pid);
+	 
+	 void deleteByCategoryId(String cId);
 }

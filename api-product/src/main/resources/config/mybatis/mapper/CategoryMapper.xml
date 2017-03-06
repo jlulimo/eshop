@@ -35,6 +35,10 @@
 		update t_category set name = #{name}
 		where category_id = #{cid}
 	</update>
+	
+	<delete id="deleteByCategoryId" parameterType="String">
+		delete from t_category where category_id = #{cid}
+	</delete>
 
 	<delete id="delete" parameterType="long">
 		delete from t_category where id = #{id}

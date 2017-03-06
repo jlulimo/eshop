@@ -31,7 +31,7 @@ public class CategoryServiceImpl extends GenericServiceImpl<CategoryDto, Categor
 		Category domain = new Category();
 		if (StringUtils.isEmpty(t.getId())) {
 			domain.setCid(UUID.randomUUID().toString());
-		}else{
+		} else {
 			domain.setCid(t.getId());
 		}
 		domain.setType(t.getType());
@@ -78,7 +78,7 @@ public class CategoryServiceImpl extends GenericServiceImpl<CategoryDto, Categor
 	public String addCategory(CategoryDto categoryDto) {
 		CategoryDto existed = this.getCategoryByName(categoryDto.getName());
 		if (null != existed) {
-			logger.warn("category: {%s} existed", categoryDto.getName());
+			logger.warn(String.format("category: {%s} existed", categoryDto.getName()));
 			return null;
 		}
 		try {
@@ -94,7 +94,7 @@ public class CategoryServiceImpl extends GenericServiceImpl<CategoryDto, Categor
 	public String editCategory(CategoryDto categoryDto) {
 		CategoryDto existed = this.getCategoryByName(categoryDto.getName());
 		if (null != existed) {
-			logger.warn("category: {%s} existed", categoryDto.getName());
+			logger.warn(String.format("category: {%s} existed", categoryDto.getName()));
 			return null;
 		}
 		try {
@@ -104,6 +104,11 @@ public class CategoryServiceImpl extends GenericServiceImpl<CategoryDto, Categor
 			logger.warn("edit category failed", e);
 			return null;
 		}
+	}
+
+	@Override
+	public void deleteCategoryById(String cId) {
+		this.categoryDao.deleteByCategoryId(cId);
 	}
 
 }

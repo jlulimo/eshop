@@ -88,12 +88,36 @@ $(function() {
             });
 
             $('#deleteNode').on('click', function(event) {
-                var ref = $('#jstree_demo').jstree(true),
+                var ref = $('#treeview').jstree(true),
                     sel = ref.get_selected();
                 if (!sel.length) {
                     return false;
                 }
-                ref.delete_node(sel);
+                sel = sel[0];
+                $('#treeLoading').show();
+                $.ajax({
+                        contentType: "application/json; charset=utf-8",
+                        url: constants.BASE_URL + '/product/delete',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: JSON.stringify({
+                            id: sel,
+                        }),
+                    })
+                    .done(function(result) {
+                        if (result.code == 0) {
+                            console.log("success");
+                            ref.delete_node(sel);
+                        }
+                        $('#treeLoading').hide();
+                    })
+                    .fail(function() {
+                        console.log("error");
+                    })
+                    .always(function() {
+                        console.log("complete");
+                    });
+
             });
         },
         initTree: function() {

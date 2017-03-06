@@ -43,4 +43,9 @@ public class CategoryDaoImpl extends GenericDaoImpl<Category> implements Categor
 		return categoryMapper.getChildrenByParentId(pid);
 	}
 
+	@Override
+	public void deleteByCategoryId(String cId) {
+		 categoryMapper.deleteByCategoryId(cId);		
+	}
+
 }

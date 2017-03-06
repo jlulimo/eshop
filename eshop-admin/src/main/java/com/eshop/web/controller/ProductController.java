@@ -19,8 +19,6 @@ import com.eshop.web.model.CategoryNode;
 import com.eshop.web.model.ResultModel;
 import com.eshop.web.util.HttpUtil;
 
-import ch.qos.logback.core.joran.conditional.ElseAction;
-
 @Controller
 @RequestMapping(value = "product")
 public class ProductController {
@@ -136,7 +134,7 @@ public class ProductController {
 			resultModel.setCode(PromptMsg.DEL_FAILED.getCode());
 			resultModel.setMsg("节点ID为空");
 		} else {
-			resultModel = HttpUtil.exectPost(resultModel.getClass(), categoryNode, "/delete");
+			resultModel = HttpUtil.exectPost(resultModel.getClass(), categoryNode, "/category/delete");
 		}
 		return resultModel;
 	}

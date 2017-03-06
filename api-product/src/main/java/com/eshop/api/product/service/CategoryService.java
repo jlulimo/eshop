@@ -14,4 +14,6 @@ public interface CategoryService extends GenericService<CategoryDto> {
 	String addCategory(CategoryDto categoryDto);
 	
 	String editCategory(CategoryDto categoryDto);
+	
+	void deleteCategoryById(String cId);
 }

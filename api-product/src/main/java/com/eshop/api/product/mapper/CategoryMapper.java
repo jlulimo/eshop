@@ -8,11 +8,13 @@ import com.eshop.api.product.domain.Category;
 
 @Mapper
 public interface CategoryMapper extends GenericMapper<Category> {
-	public int count();
+	int count();
 
-	public Category getCategoryByName(String cName);
+	Category getCategoryByName(String cName);
 
-	public Category getByCategoryId(String cId);
+	Category getByCategoryId(String cId);
 
-	public List<Category> getChildrenByParentId(String pid);
+	List<Category> getChildrenByParentId(String pid);
+
+	void deleteByCategoryId(String cId);
 }

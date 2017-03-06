@@ -5,7 +5,7 @@ public class Category {
 	private String cid;
 	private String parentId;
 	private String name;
-	private String cno;
+	private String no;
 	private int type;
 	private int level;
 
@@ -57,12 +57,12 @@ public class Category {
 		this.name = name;
 	}
 
-	public String getCno() {
-		return cno;
+	public String getNo() {
+		return no;
 	}
 
-	public void setCno(String cno) {
-		this.cno = cno;
+	public void setNo(String no) {
+		this.no = no;
 	}
 
 }

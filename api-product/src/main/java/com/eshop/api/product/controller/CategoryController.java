@@ -55,8 +55,13 @@ public class CategoryController extends BaseController<CategoryNode, CategoryDto
 			resultModel.setMsg("父节点ID为空");
 		} else {
 			String categoryId = categoryService.addCategory(this.convertToDto(categoryNode));
-			resultModel.setCode(PromptMsg.SUCCESS.getCode());
-			resultModel.setData(categoryId);
+			if (!StringUtils.isEmpty(categoryId)) {
+				resultModel.setCode(PromptMsg.SUCCESS.getCode());
+				resultModel.setData(categoryNode.getParent());
+			}else{
+				resultModel.setCode(PromptMsg.ADD_FAILED.getCode());
+				resultModel.setMsg("category name existed.");
+			}
 		}
 		return resultModel;
 	}
@@ -76,6 +81,14 @@ public class CategoryController extends BaseController<CategoryNode, CategoryDto
 			resultModel.setCode(PromptMsg.EDIT_FAILED.getCode());
 			resultModel.setMsg("节点ID为空");
 		} else {
+			String categoryId = categoryService.editCategory(this.convertToDto(categoryNode));
+			if (!StringUtils.isEmpty(categoryId)) {
+				resultModel.setCode(PromptMsg.SUCCESS.getCode());
+				resultModel.setData(categoryNode.getParent());
+			}else{
+				resultModel.setCode(PromptMsg.EDIT_FAILED.getCode());
+				resultModel.setMsg("category name existed.");
+			}
 		}
 		return resultModel;
 	}
@@ -104,6 +117,7 @@ public class CategoryController extends BaseController<CategoryNode, CategoryDto
 			return null;
 		}
 		CategoryDto dto = new CategoryDto();
+		dto.setId(d.getId());
 		dto.setName(d.getText());
 		dto.setParentId(d.getParent());
 		dto.setType(d.getType());
@@ -114,7 +128,7 @@ public class CategoryController extends BaseController<CategoryNode, CategoryDto
 	@Override
 	public CategoryNode convertToModel(CategoryDto t) {
 		CategoryNode model = new CategoryNode();
-		model.setId(t.getCid());
+		model.setId(t.getId());
 		model.setType(t.getType());
 		model.setText(t.getName());
 		model.setParent(t.getParentId());

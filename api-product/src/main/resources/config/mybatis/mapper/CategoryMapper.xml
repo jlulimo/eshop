@@ -32,10 +32,8 @@
 	</insert>
 
 	<update id="update" parameterType="Category">
-		update t_category set name =
-		#{name}, password = #{password}, salt=#{salt}, type=#{type}, enable =
-		#{enable}, deleted=#{deleted}, locked =#{locked}
-		where id = #{id}
+		update t_category set name = #{name}
+		where category_id = #{cid}
 	</update>
 
 	<delete id="delete" parameterType="long">

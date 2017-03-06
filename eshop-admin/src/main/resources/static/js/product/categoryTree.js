@@ -4,6 +4,7 @@ $(function() {
             categoryTree.initTree();
             categoryTree.initEvent();
             $('#treeLoading').hide();
+            $('#alertWin').hide();
         },
         initEvent: function() {
             $('#createNode').on('click', function(event) {
@@ -28,9 +29,12 @@ $(function() {
                                 }),
                             })
                             .done(function(result) {
-                                $('#treeview').jstree(true).refresh('#'+result.data);
-                                console.log("success");
-                                alert(result.data);
+                                if (result.code != 0) {
+                                    $('#alert-body').text(result.msg);
+                                    $('#alertWin').show();
+                                }
+                                $('#treeview').jstree(true).refresh('#' + result.data);
+                                $('#treeLoading').hide();
                             })
                             .fail(function() {
                                 console.log("error");
@@ -55,16 +59,22 @@ $(function() {
                 ref.edit(sel, null, function(node, status) {
                     $('#treeLoading').show();
                     $.ajax({
-                            url: constants.BASE_URL + '/product/renameCategory',
+                            contentType: "application/json; charset=utf-8",
+                            url: constants.BASE_URL + '/product/edit',
                             type: 'POST',
                             dataType: 'json',
-                            data: {
-                                nodeId: node.id,
-                                text: node.text
-                            },
+                            data: JSON.stringify({
+                                id: node.id,
+                                text: node.text,
+                                parent: node.parent,
+                            }),
                         })
                         .done(function(result) {
-                            console.log("success");
+                            if (result.code != 0) {
+                                $('#alert-body').text(result.msg);
+                                $('#alertWin').show();
+                            }
+                            $('#treeview').jstree(true).refresh('#' + result.data);
                             $('#treeLoading').hide();
                         })
                         .fail(function() {

@@ -29,11 +29,13 @@ public class CategoryServiceImpl extends GenericServiceImpl<CategoryDto, Categor
 			return null;
 		}
 		Category domain = new Category();
-		if (StringUtils.isEmpty(t.getCid())) {
+		if (StringUtils.isEmpty(t.getId())) {
 			domain.setCid(UUID.randomUUID().toString());
+		}else{
+			domain.setCid(t.getId());
 		}
 		domain.setType(t.getType());
-		domain.setCno(t.getcNo());
+		domain.setNo(t.getNo());
 		domain.setName(t.getName());
 		domain.setParentId(t.getParentId());
 		return domain;
@@ -45,9 +47,8 @@ public class CategoryServiceImpl extends GenericServiceImpl<CategoryDto, Categor
 			return null;
 		}
 		CategoryDto dto = new CategoryDto();
-		dto.setCid(d.getCid());
-		dto.setcNo(d.getCno());
-		dto.setId(d.getId());
+		dto.setId(d.getCid());
+		dto.setNo(d.getNo());
 		dto.setName(d.getName());
 		dto.setParentId(d.getParentId());
 		dto.setType(d.getType());
@@ -82,9 +83,25 @@ public class CategoryServiceImpl extends GenericServiceImpl<CategoryDto, Categor
 		}
 		try {
 			this.add(categoryDto);
-			return categoryDto.getCid();
+			return categoryDto.getId();
 		} catch (Exception e) {
 			logger.warn("add category failed", e);
+			return null;
+		}
+	}
+
+	@Override
+	public String editCategory(CategoryDto categoryDto) {
+		CategoryDto existed = this.getCategoryByName(categoryDto.getName());
+		if (null != existed) {
+			logger.warn("category: {%s} existed", categoryDto.getName());
+			return null;
+		}
+		try {
+			this.update(categoryDto);
+			return categoryDto.getId();
+		} catch (Exception e) {
+			logger.warn("edit category failed", e);
 			return null;
 		}
 	}

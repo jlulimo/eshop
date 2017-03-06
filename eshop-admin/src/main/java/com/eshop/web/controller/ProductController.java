@@ -1,7 +1,6 @@
 package com.eshop.web.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -19,6 +18,8 @@ import com.eshop.web.constants.PromptMsg;
 import com.eshop.web.model.CategoryNode;
 import com.eshop.web.model.ResultModel;
 import com.eshop.web.util.HttpUtil;
+
+import ch.qos.logback.core.joran.conditional.ElseAction;
 
 @Controller
 @RequestMapping(value = "product")
@@ -63,8 +64,7 @@ public class ProductController {
 			root.setType("root");
 			result.setCode(PromptMsg.SUCCESS.getCode());
 			result.setData(root);
-		} 
-		else {
+		} else {
 			Map<String, String> parm = new HashMap<>();
 			parm.put("pid", nodeId);
 			ResultModel apiResult = HttpUtil.exectGet(ResultModel.class, "/category/browse", parm);
@@ -78,27 +78,6 @@ public class ProductController {
 		}
 		return result;
 	}
-
-	// private CategoryNode assembleTree() {
-	//// CategoryNode rootNode = new CategoryNode();
-	//// rootNode.setId("root");
-	//// rootNode.setText("商品类别管理");
-	//// rootNode.setType("root");
-	//// // todo getchildren..
-	//// CategoryNode c1 = new CategoryNode();
-	//// c1.setId("c1");
-	//// c1.setText("类别1");
-	//// c1.setType("category");
-	//// CategoryNode c2 = new CategoryNode();
-	//// c2.setId("c2");
-	//// c2.setText("类别2");
-	//// c2.setType("category");
-	//// List<CategoryNode> children = new ArrayList<>();
-	//// children.add(c1);
-	//// children.add(c2);
-	//// rootNode.setChildren(children);
-	//// return rootNode;
-	// }
 
 	@ResponseStatus(value = HttpStatus.OK)
 	@RequestMapping(value = "addCategory", method = RequestMethod.POST)
@@ -123,7 +102,7 @@ public class ProductController {
 	}
 
 	@ResponseStatus(value = HttpStatus.OK)
-	@RequestMapping(value = "renameCategory", method = RequestMethod.POST)
+	@RequestMapping(value = "edit", method = RequestMethod.POST)
 	@ResponseBody
 	public ResultModel renameCategory(@RequestBody CategoryNode categoryNode) {
 		ResultModel resultModel = new ResultModel();
@@ -136,14 +115,17 @@ public class ProductController {
 		} else if (StringUtils.isEmpty(categoryNode.getId())) {
 			resultModel.setCode(PromptMsg.EDIT_FAILED.getCode());
 			resultModel.setMsg("节点ID为空");
+		} else if (StringUtils.isEmpty(categoryNode.getParent())) {
+			resultModel.setCode(PromptMsg.EDIT_FAILED.getCode());
+			resultModel.setMsg("父节点ID为空");
 		} else {
-			resultModel = HttpUtil.exectPost(resultModel.getClass(), categoryNode, "/renameCategory");
+			resultModel = HttpUtil.exectPost(resultModel.getClass(), categoryNode, "/category/edit");
 		}
 		return resultModel;
 	}
 
 	@ResponseStatus(value = HttpStatus.OK)
-	@RequestMapping(value = "deleteCategory", method = RequestMethod.POST)
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	@ResponseBody
 	public ResultModel delCategoryNode(@RequestBody CategoryNode categoryNode) {
 		ResultModel resultModel = new ResultModel();
@@ -154,7 +136,7 @@ public class ProductController {
 			resultModel.setCode(PromptMsg.DEL_FAILED.getCode());
 			resultModel.setMsg("节点ID为空");
 		} else {
-			resultModel = HttpUtil.exectPost(resultModel.getClass(), categoryNode, "/delCategory");
+			resultModel = HttpUtil.exectPost(resultModel.getClass(), categoryNode, "/delete");
 		}
 		return resultModel;
 	}

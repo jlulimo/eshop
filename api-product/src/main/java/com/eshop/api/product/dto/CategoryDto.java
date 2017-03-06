@@ -1,44 +1,19 @@
 package com.eshop.api.product.dto;
 
 public class CategoryDto {
-	private long id;
-	private String cid;
+	private String id;
 	private String parentId;
 	private String name;
-	private String cNo;
+	private String no;
 	private int type;
 	private int level;
 
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
-	}
-
-	public int getType() {
-		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
-	}
-
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getCid() {
-		return cid;
-	}
-
-	public void setCid(String cid) {
-		this.cid = cid;
 	}
 
 	public String getParentId() {
@@ -57,12 +32,28 @@ public class CategoryDto {
 		this.name = name;
 	}
 
-	public String getcNo() {
-		return cNo;
+	public String getNo() {
+		return no;
 	}
 
-	public void setcNo(String cNo) {
-		this.cNo = cNo;
+	public void setNo(String no) {
+		this.no = no;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
 }

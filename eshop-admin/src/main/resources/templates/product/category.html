@@ -22,15 +22,15 @@
                     </div>
                     <div class="box-body">
                         <div class="btn-group">
-                            <button id="createNode" class="btn btn-success btn-flat">添加</button>
+                            <button id="createNode" class="btn btn-success btn-flat" data-toggle = "modal" data-target = "#myModal">添加</button>
                             <button id="deleteNode" class="btn btn-success btn-flat">删除</button>
                             <button id="editNode" class="btn btn-success btn-flat">修改</button>
                         </div>
                         <div id="alertWin" class="alert alert-danger alert-dismissible">
                             <button type="button" class="close" onclick="$('#alertWin').hide()">×</button>
                             <div id="alert-title">
-                                <h4><i class="icon fa fa-warning"></i> 系统信息</h4> 
-                             </div>
+                                <h4><i class="icon fa fa-warning"></i> 系统信息</h4>
+                            </div>
                             <div id="alert-body">Warning alert preview. This alert is dismissable.</div>
                         </div>
                         <div id="treeview">
@@ -50,129 +50,37 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">
+               This Modal title
+            </h4>
+            </div>
+            <div class="modal-body">
+                Click on close button to check Event functionality.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary">
+                    Submit changes
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
     </div>
-    <!-- <div class="row">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div class="btn-group">
-                    <button class="btn btn-success btn-flat">添加</button>
-                    <button class="btn btn-success btn-flat">删除</button>
-                    <button class="btn btn-success btn-flat">修改</button>
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div id="level2BtnGroup" class="btn-group">
-                    <button class="btn btn-success btn-flat">添加</button>
-                    <button class="btn btn-success btn-flat">删除</button>
-                    <button class="btn btn-success btn-flat">修改</button>
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div id="level3BtnGroup"  class="btn-group">
-                    <button class="btn btn-success btn-flat">添加</button>
-                    <button class="btn btn-success btn-flat">删除</button>
-                    <button class="btn btn-success btn-flat">修改</button>
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div id="level4BtnGroup"  class="btn-group">
-                    <button class="btn btn-success btn-flat">添加</button>
-                    <button class="btn btn-success btn-flat">删除</button>
-                    <button class="btn btn-success btn-flat">修改</button>
-                </div>
-            </div>
-        </div>
-        <div class="row" style="height: 200px;">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div>
-                    <select id="level1" class="selectpicker" data-hide-disabled="false" data-live-search="true">
-                        <optgroup disabled="disabled" label="disabled">
-                            <option>Hidden</option>
-                        </optgroup>
-                        <optgroup label="Fruit">
-                            <option>Apple</option>
-                            <option>Orange</option>
-                        </optgroup>
-                        <optgroup label="Vegetable">
-                            <option>Corn</option>
-                            <option>Carrot</option>
-                        </optgroup>
-                    </select>
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div>
-                    <select id="level2" class="selectpicker" data-hide-disabled="false" data-live-search="true">
-                        <optgroup disabled="disabled" label="disabled">
-                            <option>Hidden</option>
-                        </optgroup>
-                        <optgroup label="Fruit">
-                            <option>Apple</option>
-                            <option>Orange</option>
-                        </optgroup>
-                        <optgroup label="Vegetable">
-                            <option>Corn</option>
-                            <option>Carrot</option>
-                        </optgroup>
-                    </select>
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div>
-                    <select id="level3" class="selectpicker" data-hide-disabled="false" data-live-search="true">
-                        <optgroup disabled="disabled" label="disabled">
-                            <option>Hidden</option>
-                        </optgroup>
-                        <optgroup label="Fruit">
-                            <option>Apple</option>
-                            <option>Orange</option>
-                        </optgroup>
-                        <optgroup label="Vegetable">
-                            <option>Corn</option>
-                            <option>Carrot</option>
-                        </optgroup>
-                    </select>
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <div>
-                    <select id="level4" class="selectpicker" data-hide-disabled="false" data-live-search="true">
-                        <optgroup disabled="disabled" label="disabled">
-                            <option>Hidden</option>
-                        </optgroup>
-                        <optgroup label="Fruit">
-                            <option>Apple</option>
-                            <option>Orange</option>
-                        </optgroup>
-                        <optgroup label="Vegetable">
-                            <option>Corn</option>
-                            <option>Carrot</option>
-                        </optgroup>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div>
-                <div id="custom-search-input">
-                    <div class="input-group col-md-12">
-                        <input id="search" type="text" class="form-control input-lg" placeholder="Search" />
-                        <span class="input-group-btn">
-								<button class="btn btn-info btn-lg" type="button">
-									<i class="glyphicon glyphicon-search"></i>
-								</button>
-							</span>
-                    </div>
-                    <ul class="list-group">
-                        <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Morbi leo risus</li>
-                        <li class="list-group-item">Porta ac consectetur ac</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                    </ul>
-                </div>
-            </div>
-        </div> -->
-    <!-- </div> -->
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+    </div>
+    
+
 </body>
 
 </html>

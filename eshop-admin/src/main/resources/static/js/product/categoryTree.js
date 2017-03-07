@@ -7,47 +7,47 @@ $(function() {
             $('#alertWin').hide();
         },
         initEvent: function() {
-            $('#createNode').on('click', function(event) {
-                var ref = $('#treeview').jstree(true),
-                    sel = ref.get_selected();
-                if (!sel.length) {
-                    return false;
-                }
-                sel = sel[0];
-                sel = ref.create_node(sel, { "type": "category" });
-                if (sel) {
-                    ref.edit(sel, null, function(node, status) {
-                        $('#treeLoading').show();
-                        $.ajax({
-                                contentType: "application/json; charset=utf-8",
-                                url: constants.BASE_URL + '/product/addCategory',
-                                type: 'POST',
-                                dataType: 'json',
-                                data: JSON.stringify({
-                                    text: node.text,
-                                    parent: node.parent,
-                                }),
-                            })
-                            .done(function(result) {
-                                if (result.code != 0) {
-                                    $('#alert-body').text(result.msg);
-                                    $('#alertWin').show();
-                                }
-                                $('#treeview').jstree(true).refresh('#' + result.data);
-                                $('#treeLoading').hide();
-                            })
-                            .fail(function() {
-                                console.log("error");
-                            })
-                            .always(function() {
-                                console.log("complete");
-                                $('#treeLoading').hide();
-                            });
+            // $('#createNode').on('click', function(event) {
+            //     var ref = $('#treeview').jstree(true),
+            //         sel = ref.get_selected();
+            //     if (!sel.length) {
+            //         return false;
+            //     }
+            //     sel = sel[0];
+            //     sel = ref.create_node(sel, { "type": "category" });
+            //     if (sel) {
+            //         ref.edit(sel, null, function(node, status) {
+            //             $('#treeLoading').show();
+            //             $.ajax({
+            //                     contentType: "application/json; charset=utf-8",
+            //                     url: constants.BASE_URL + '/product/addCategory',
+            //                     type: 'POST',
+            //                     dataType: 'json',
+            //                     data: JSON.stringify({
+            //                         text: node.text,
+            //                         parent: node.parent,
+            //                     }),
+            //                 })
+            //                 .done(function(result) {
+            //                     if (result.code != 0) {
+            //                         $('#alert-body').text(result.msg);
+            //                         $('#alertWin').show();
+            //                     }
+            //                     $('#treeview').jstree(true).refresh('#' + result.data);
+            //                     $('#treeLoading').hide();
+            //                 })
+            //                 .fail(function() {
+            //                     console.log("error");
+            //                 })
+            //                 .always(function() {
+            //                     console.log("complete");
+            //                     $('#treeLoading').hide();
+            //                 });
 
-                    });
-                }
+            //         });
+            //     }
 
-            });
+            // });
 
             $('#editNode').on('click', function(event) {
                 var ref = $('#treeview').jstree(true),

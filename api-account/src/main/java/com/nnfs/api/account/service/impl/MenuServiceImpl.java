@@ -1,5 +1,6 @@
 package com.nnfs.api.account.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +48,10 @@ public class MenuServiceImpl extends GenericServiceImpl<MenuDto, Menu> implement
 
 	@Override
 	public List<MenuDto> getChildrenByParentId(String pid) {
-		// TODO Auto-generated method stub
-		return null;
+		List<MenuDto> result = new ArrayList<>();
+		List<Menu> domains = menuDao.getChildrenByParentId(pid);
+		domains.forEach(domain -> result.add(this.convertToDto(domain)));
+		return result;
 	}
 
 }

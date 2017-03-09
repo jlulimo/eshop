@@ -1,6 +1,3 @@
-drop database if exists eshop;
-create database eshop;
-use eshop;
 
 drop table if exists t_account;
 drop table if exists t_group;
@@ -13,6 +10,8 @@ drop table if exists t_group_role;
 drop table if exists t_role_permission;
 drop table if exists t_account_token;
 
+drop table if exists t_menu;
+drop table if exists t_role_menu;
 
 create table t_account (
   id bigint auto_increment,
@@ -85,7 +84,23 @@ create table t_account_token(
 	id bigint auto_increment,
 	accountId varchar(100),
 	token varchar(100),
-	constraint pk_t_client primary key(id)
+	constraint pk_t_account_token primary key(id)
+)charset=utf8 ENGINE=InnoDB;
+
+create table t_menu(
+	id bigint auto_increment,
+	menu_id varchar(100),
+	parent_id varchar(100),
+	name varchar(100),
+	status int,
+	constraint pk_t_menu primary key(id)
+)charset=utf8 ENGINE=InnoDB;
+
+create table t_role_menu(
+	id bigint auto_increment,
+	role_id varchar(100),
+	menu_id varchar(100),
+	
 )charset=utf8 ENGINE=InnoDB;
 
 insert into t_account(name,password)values('zhang','123');

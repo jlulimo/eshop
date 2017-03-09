@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nnfs.api.account.mapper.MenuMapper">
+	<select id="get" parameterType="long" resultType="Menu">
+		select * from t_menu where id = #{id}
+	</select>
+	
+	<select id="getChildrenByParentId" parameterType="String" resultType="Menu">
+		select * from t_menu where menu_id = #{menuId}
+	</select>
+	
+	<select id="getMenuById" parameterType="String" resultType="Menu">
+		select * from t_menu where MenuId = #{menuId}
+	</select>
+	
+	<select id="getMenuByName" parameterType="String" resultType="Menu">
+		select * from t_menu where name = #{name}
+	</select>
+
+	<select id="getAll" resultType="Menu">
+		select * from t_menu;
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) from t_menu
+	</select>
+
+	<insert id="create" parameterType="Menu">
+		insert into t_menu (menuId,parentId,name) values (#{menuId},#{parentId},#{name})
+	</insert>
+
+	<update id="update" parameterType="Menu">
+		update t_Menu set name =
+		#{name}, password = #{password}, salt=#{salt}, type=#{type}, enable =
+		#{enable}, deleted=#{deleted}, locked =#{locked}
+		where id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="long">
+		delete from t_Menu where id = #{id}
+	</delete>
+</mapper>

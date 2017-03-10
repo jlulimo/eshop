@@ -100,7 +100,7 @@ create table t_role_menu(
 	id bigint auto_increment,
 	role_id varchar(100),
 	menu_id varchar(100),
-	
+	constraint t_role_menu primary key(id)
 )charset=utf8 ENGINE=InnoDB;
 
 insert into t_account(name,password)values('zhang','123');

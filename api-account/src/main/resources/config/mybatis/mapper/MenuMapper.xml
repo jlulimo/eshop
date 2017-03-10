@@ -8,7 +8,7 @@
 	</select>
 	
 	<select id="getChildrenByParentId" parameterType="String" resultType="Menu">
-		select * from t_menu where menu_id = #{menuId}
+		select * from t_menu where parent_id = #{menuId}
 	</select>
 	
 	<select id="getMenuById" parameterType="String" resultType="Menu">
@@ -28,17 +28,17 @@
 	</select>
 
 	<insert id="create" parameterType="Menu">
-		insert into t_menu (menuId,parentId,name) values (#{menuId},#{parentId},#{name})
+		insert into t_menu (menu_id,parent_id,name) values (#{menuId},#{parentId},#{name})
 	</insert>
 
 	<update id="update" parameterType="Menu">
-		update t_Menu set name =
+		update t_menu set name =
 		#{name}, password = #{password}, salt=#{salt}, type=#{type}, enable =
 		#{enable}, deleted=#{deleted}, locked =#{locked}
 		where id = #{id}
 	</update>
 
 	<delete id="delete" parameterType="long">
-		delete from t_Menu where id = #{id}
+		delete from t_menu where id = #{id}
 	</delete>
 </mapper>

@@ -2,7 +2,9 @@ package com.nnfs.api.account.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +30,9 @@ public class MenuServiceImpl extends GenericServiceImpl<MenuDto, Menu> implement
 		if (null == t) {
 			return null;
 		}
-		domain.setMenuId(t.getMenuId());
+		if (StringUtils.isEmpty(t.getMenuId())) {
+			domain.setMenuId(UUID.randomUUID().toString());
+		}
 		domain.setName(t.getName());
 		domain.setParentId(t.getParentId());
 		return domain;

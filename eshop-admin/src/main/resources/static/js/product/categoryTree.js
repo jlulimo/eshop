@@ -20,7 +20,7 @@ $(function() {
                         $('#treeLoading').show();
                         $.ajax({
                                 contentType: "application/json; charset=utf-8",
-                                url: constants.BASE_URL + '/product/addCategory',
+                                url: constants.BASE_URL + '/product/add',
                                 type: 'POST',
                                 dataType: 'json',
                                 data: JSON.stringify({

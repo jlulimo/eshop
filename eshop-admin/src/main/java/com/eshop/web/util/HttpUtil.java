@@ -40,10 +40,10 @@ public class HttpUtil {
 	 * @param Model对象
 	 * @param 相对URL
 	 */
-	public static <T> T exectPost(Class<T> tClass, Object object, String relativelyUrl) {
+	public static <T> T exectPost(Class<T> tClass, Object object, String url) {
 		T t = null;
 		// build a request
-		Request request = new Request.Builder().url(HttpUtil.PRODUCT_BASE_URL + relativelyUrl)
+		Request request = new Request.Builder().url(url)
 				.post(RequestBody.create(HttpUtil.JSON_TYPE, JSON.toJSONString(object))).build();
 		try {
 			Response response = HttpUtil.getHttpClient().newCall(request).execute();
@@ -57,14 +57,14 @@ public class HttpUtil {
 		return t;
 	}
 
-	public static <T> T exectGet(Class<T> tClass, String relativelyUrl, Map<String, String> param) {
+	public static <T> T exectGet(Class<T> tClass,  String url, Map<String, String> param) {
 		T t = null;
-		HttpUrl.Builder urlBuilder = HttpUrl.parse(HttpUtil.PRODUCT_BASE_URL + relativelyUrl).newBuilder();
+		HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
 		for (Map.Entry<String, String> kvp : param.entrySet()) {
 			urlBuilder.addQueryParameter(kvp.getKey(), kvp.getValue());
 		}
-		String url = urlBuilder.build().toString();
-		Request request = new Request.Builder().url(url).build();
+		String uri = urlBuilder.build().toString();
+		Request request = new Request.Builder().url(uri).build();
 		try {
 			Response response = HttpUtil.getHttpClient().newCall(request).execute();
 			if (response.isSuccessful()) {

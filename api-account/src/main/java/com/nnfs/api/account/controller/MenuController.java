@@ -3,12 +3,15 @@ package com.nnfs.api.account.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -45,15 +48,93 @@ public class MenuController extends BaseController<MenuModel, MenuDto> {
 		return result;
 	}
 
+	@ResponseStatus(value = HttpStatus.OK)
+	@RequestMapping(value = "add", method = RequestMethod.POST)
+	@ResponseBody
+	public ApiResult add(@RequestBody MenuModel menuModel) {
+		ApiResult resultModel = new ApiResult();
+		if (null == menuModel) {
+			resultModel.setCode(PromptMsg.ADD_FAILED.getCode());
+			resultModel.setMsg(PromptMsg.ADD_FAILED.getMsg());
+		} else if (StringUtils.isEmpty(menuModel.getText())) {
+			resultModel.setCode(PromptMsg.ADD_FAILED.getCode());
+			resultModel.setMsg("节点名字为空");
+		} else if (StringUtils.isEmpty(menuModel.getParent())) {
+			resultModel.setCode(PromptMsg.ADD_FAILED.getCode());
+			resultModel.setMsg("父节点ID为空");
+		} else {
+			try {
+				this.menuService.add(this.convertToDto(menuModel));
+				resultModel.setCode(PromptMsg.SUCCESS.getCode());
+				resultModel.setData(menuModel.getParent());
+			} catch (Exception e) {
+				resultModel.setCode(PromptMsg.ADD_FAILED.getCode());
+				resultModel.setMsg("menu name existed.");
+			}
+		}
+		return resultModel;
+	}
+
+	@ResponseStatus(value = HttpStatus.OK)
+	@RequestMapping(value = "edit", method = RequestMethod.POST)
+	@ResponseBody
+	public ApiResult edit(@RequestBody MenuModel menuModel) {
+		ApiResult resultModel = new ApiResult();
+		if (null == menuModel) {
+			resultModel.setCode(PromptMsg.EDIT_FAILED.getCode());
+			resultModel.setMsg(PromptMsg.EDIT_FAILED.getMsg());
+		} else if (StringUtils.isEmpty(menuModel.getText())) {
+			resultModel.setCode(PromptMsg.EDIT_FAILED.getCode());
+			resultModel.setMsg("节点名字为空");
+		} else if (StringUtils.isEmpty(menuModel.getParent())) {
+			resultModel.setCode(PromptMsg.EDIT_FAILED.getCode());
+			resultModel.setMsg("节点ID为空");
+		} else {
+			try {
+				this.menuService.update(this.convertToDto(menuModel));
+				resultModel.setCode(PromptMsg.SUCCESS.getCode());
+				resultModel.setData(menuModel.getParent());
+			} catch (Exception e) {
+				resultModel.setCode(PromptMsg.EDIT_FAILED.getCode());
+				resultModel.setMsg("menu name existed.");
+			}
+		}
+		return resultModel;
+	}
+
+	@ResponseStatus(value = HttpStatus.OK)
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	@ResponseBody
+	public ApiResult delete(@RequestBody MenuModel menuModel) {
+		ApiResult resultModel = new ApiResult();
+		if (null == menuModel) {
+			resultModel.setCode(PromptMsg.DEL_FAILED.getCode());
+			resultModel.setMsg(PromptMsg.DEL_FAILED.getMsg());
+		} else if (StringUtils.isEmpty(menuModel.getParent())) {
+			resultModel.setCode(PromptMsg.DEL_FAILED.getCode());
+			resultModel.setMsg("节点ID为空");
+		} else {
+			try {
+				// this.menuService.deleteCategoryById(categoryNode.get);
+				resultModel.setCode(PromptMsg.SUCCESS.getCode());
+				resultModel.setData(menuModel.getParent());
+			} catch (Exception e) {
+				resultModel.setCode(PromptMsg.DEL_FAILED.getCode());
+				resultModel.setMsg(PromptMsg.DEL_FAILED.getMsg());
+			}
+		}
+		return resultModel;
+	}
+
 	@Override
 	public MenuDto convertToDto(MenuModel d) {
 		if (null == d) {
 			return null;
 		}
 		MenuDto dto = new MenuDto();
-		dto.setMenuId(d.getMenuId());
-		dto.setName(d.getName());
-		dto.setParentId(d.getParentId());
+		dto.setMenuId(d.getId());
+		dto.setName(d.getText());
+		dto.setParentId(d.getParent());
 		return dto;
 	}
 
@@ -63,9 +144,9 @@ public class MenuController extends BaseController<MenuModel, MenuDto> {
 			return null;
 		}
 		MenuModel model = new MenuModel();
-		model.setMenuId(t.getMenuId());
-		model.setName(t.getName());
-		model.setParentId(t.getParentId());
+		model.setId(t.getMenuId());
+		model.setText(t.getName());
+		model.setParent(t.getParentId());
 		return model;
 	}
 }

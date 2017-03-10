@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+
+<head>
+    <title>菜单管理</title>
+    <link rel="stylesheet" th:href="@{/dist/css/jstree/themes/default/style.min.css}">
+    <script th:src="@{/dist/js/jstree/jstree.min.js}"></script>
+    <script th:src=@{/js/menu/menuTree.js}></script>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="box box-default box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">菜单管理</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="btn-group">
+                            <button id="createNode" class="btn btn-success btn-flat">添加</button>
+                            <button id="deleteNode" class="btn btn-success btn-flat">删除</button>
+                            <button id="editNode" class="btn btn-success btn-flat">修改</button>
+                        </div>
+                        <div id="alertWin" class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" onclick="$('#alertWin').hide()">×</button>
+                            <div id="alert-title">
+                                <h4><i class="icon fa fa-warning"></i>系统信息</h4>
+                            </div>
+                            <div id="alert-body">Warning alert preview. This alert is dismissable.</div>
+                        </div>
+                        <div id="treeview">
+                        </div>
+                    </div>
+                    <div id="treeLoading" class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+
+</html>

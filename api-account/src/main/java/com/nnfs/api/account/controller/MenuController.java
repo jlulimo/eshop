@@ -137,7 +137,7 @@ public class MenuController extends BaseController<MenuModel, MenuDto> {
 		dto.setParentId(d.getParent());
 		return dto;
 	}
-
+ 
 	@Override
 	public MenuModel convertToModel(MenuDto t) {
 		if (null == t) {

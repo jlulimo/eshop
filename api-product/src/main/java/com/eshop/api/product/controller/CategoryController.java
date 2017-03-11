@@ -96,7 +96,7 @@ public class CategoryController extends BaseController<CategoryNode, CategoryDto
 	@ResponseStatus(value = HttpStatus.OK)
 	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	@ResponseBody
-	public ResultModel delCategoryNode(@RequestBody CategoryNode categoryNode) {
+	public ResultModel delete(@RequestBody CategoryNode categoryNode) {
 		ResultModel resultModel = new ResultModel();
 		if (null == categoryNode) {
 			resultModel.setCode(PromptMsg.DEL_FAILED.getCode());
@@ -108,7 +108,6 @@ public class CategoryController extends BaseController<CategoryNode, CategoryDto
 			try {
 				this.categoryService.deleteCategoryById(categoryNode.getId());
 				resultModel.setCode(PromptMsg.SUCCESS.getCode());
-				resultModel.setData(categoryNode.getParent());
 			} catch (Exception e) {
 				resultModel.setCode(PromptMsg.DEL_FAILED.getCode());
 			}

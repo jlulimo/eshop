@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -29,10 +30,10 @@ public class MenuController extends BaseController<MenuModel, MenuDto> {
 	@Autowired
 	private MenuService menuService;
 
-	@RequestMapping(value = "browse")
-	@ResponseBody
 	@ResponseStatus(value = HttpStatus.OK)
-	public ApiResult browse(String parentId) {
+	@RequestMapping(value = "browse", method = RequestMethod.GET)
+	@ResponseBody
+	public ApiResult browse(@RequestParam(value = "pid") String parentId) {
 		ApiResult result = new ApiResult();
 		List<MenuModel> data = new ArrayList<>();
 		try {
@@ -110,14 +111,13 @@ public class MenuController extends BaseController<MenuModel, MenuDto> {
 		if (null == menuModel) {
 			resultModel.setCode(PromptMsg.DEL_FAILED.getCode());
 			resultModel.setMsg(PromptMsg.DEL_FAILED.getMsg());
-		} else if (StringUtils.isEmpty(menuModel.getParent())) {
+		} else if (StringUtils.isEmpty(menuModel.getId())) {
 			resultModel.setCode(PromptMsg.DEL_FAILED.getCode());
 			resultModel.setMsg("节点ID为空");
 		} else {
 			try {
-				// this.menuService.deleteCategoryById(categoryNode.get);
+				this.menuService.deleteById(menuModel.getId());
 				resultModel.setCode(PromptMsg.SUCCESS.getCode());
-				resultModel.setData(menuModel.getParent());
 			} catch (Exception e) {
 				resultModel.setCode(PromptMsg.DEL_FAILED.getCode());
 				resultModel.setMsg(PromptMsg.DEL_FAILED.getMsg());
@@ -147,6 +147,7 @@ public class MenuController extends BaseController<MenuModel, MenuDto> {
 		model.setId(t.getMenuId());
 		model.setText(t.getName());
 		model.setParent(t.getParentId());
+		model.setChildren(true);
 		return model;
 	}
 }

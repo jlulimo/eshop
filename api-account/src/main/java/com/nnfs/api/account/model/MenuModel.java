@@ -4,6 +4,7 @@ public class MenuModel {
 	private String id;
 	private String parent;
 	private String text;
+	private boolean children;
 
 	public String getId() {
 		return id;
@@ -27,6 +28,14 @@ public class MenuModel {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public boolean isChildren() {
+		return children;
+	}
+
+	public void setChildren(boolean children) {
+		this.children = children;
 	}
 
 }

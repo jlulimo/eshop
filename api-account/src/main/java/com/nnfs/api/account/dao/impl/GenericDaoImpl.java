@@ -25,7 +25,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 	}
 
 	@Override
-	public T get(long id) {
+	public T get(String id) {
 		return mapper.get(id);
 	}
 
@@ -35,7 +35,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
 	}
 
 	@Override
-	public void delete(long id) {
+	public void delete(String id) {
 		mapper.delete(id);
 	}
 

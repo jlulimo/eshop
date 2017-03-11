@@ -2,7 +2,6 @@ package com.eshop.web.controller;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.eshop.web.constants.PromptMsg;
-import com.eshop.web.model.CategoryNode;
 import com.eshop.web.model.MenuNode;
 import com.eshop.web.model.ResultModel;
 import com.eshop.web.util.HttpUtil;

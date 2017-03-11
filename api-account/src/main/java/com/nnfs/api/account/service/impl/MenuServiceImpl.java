@@ -32,6 +32,8 @@ public class MenuServiceImpl extends GenericServiceImpl<MenuDto, Menu> implement
 		}
 		if (StringUtils.isEmpty(t.getMenuId())) {
 			domain.setMenuId(UUID.randomUUID().toString());
+		}else{
+			domain.setMenuId(t.getMenuId());
 		}
 		domain.setName(t.getName());
 		domain.setParentId(t.getParentId());
@@ -56,6 +58,11 @@ public class MenuServiceImpl extends GenericServiceImpl<MenuDto, Menu> implement
 		List<Menu> domains = menuDao.getChildrenByParentId(pid);
 		domains.forEach(domain -> result.add(this.convertToDto(domain)));
 		return result;
+	}
+
+	@Override
+	public void deleteById(String id) {
+		this.menuDao.delete(id);
 	}
 
 }

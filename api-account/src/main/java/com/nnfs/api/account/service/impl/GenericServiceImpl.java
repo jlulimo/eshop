@@ -19,7 +19,7 @@ public abstract class  GenericServiceImpl<T,D> implements GenericService<T> {
 	}
 
 	@Override
-	public void deleteById(long id) {
+	public void deleteById(String id) {
 		this.genericDao.delete(id);
 	}
 
@@ -29,7 +29,7 @@ public abstract class  GenericServiceImpl<T,D> implements GenericService<T> {
 	}
 
 	@Override
-	public T getById(long id) {
+	public T getById(String id) {
 		D domain = this.genericDao.get(id);
 		return this.convertToDto(domain);
 	}

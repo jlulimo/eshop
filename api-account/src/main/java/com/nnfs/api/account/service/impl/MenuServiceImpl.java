@@ -37,6 +37,8 @@ public class MenuServiceImpl extends GenericServiceImpl<MenuDto, Menu> implement
 		}
 		domain.setName(t.getName());
 		domain.setParentId(t.getParentId());
+		domain.setStatus(t.getStatus());
+		domain.setUrl(t.getUrl());
 		return domain;
 	}
 
@@ -49,6 +51,8 @@ public class MenuServiceImpl extends GenericServiceImpl<MenuDto, Menu> implement
 		dto.setMenuId(d.getMenuId());
 		dto.setName(d.getName());
 		dto.setParentId(d.getParentId());
+		dto.setStatus(d.getStatus());
+		dto.setUrl(d.getUrl());
 		return dto;
 	}
 

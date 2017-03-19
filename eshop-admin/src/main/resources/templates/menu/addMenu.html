@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+    <title></title>
+    <!-- <script type="text/javascript" th:src=@{/js/menu/addMenu.js}></script> -->
+</head>
+
+<body>
+    <div th:fragment="win">
+        <!-- Horizontal Form -->
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">菜单信息</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form class="form-horizontal">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label for="menuName" class="col-sm-2 control-label">菜单名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="menuName" placeholder="菜单名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="menuUrl" class="col-sm-2 control-label">菜单路径</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="menuUrl" placeholder="菜单路径">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="status" class="col-sm-2 control-label">状态</label>
+                        <div class="col-sm-10">
+                            <select id="status" class="selectpicker">
+                                <option>启用</option>
+                                <option>禁用</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"> Remember me
+                                        </label>
+                                    </div>
+                                </div>
+                            </div> -->
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <div class="btn-group pull-right">
+                        <button id="cancelBtn" type="button" class="btn btn-success">取消</button>
+                        <button id="submitBtn" type="button" class="btn btn-success">保存</button>
+                    </div>
+                </div>
+                <!-- /.box-footer -->
+            </form>
+        </div>
+        <!-- /.box -->
+    </div>
+</body>
+
+</html>

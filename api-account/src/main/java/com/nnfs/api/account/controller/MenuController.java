@@ -135,9 +135,11 @@ public class MenuController extends BaseController<MenuModel, MenuDto> {
 		dto.setMenuId(d.getId());
 		dto.setName(d.getText());
 		dto.setParentId(d.getParent());
+		dto.setStatus(d.getStatus());
+		dto.setUrl(d.getUrl());
 		return dto;
 	}
- 
+
 	@Override
 	public MenuModel convertToModel(MenuDto t) {
 		if (null == t) {
@@ -148,6 +150,8 @@ public class MenuController extends BaseController<MenuModel, MenuDto> {
 		model.setText(t.getName());
 		model.setParent(t.getParentId());
 		model.setChildren(true);
+		model.setStatus(t.getStatus());
+		model.setUrl(t.getUrl());
 		return model;
 	}
 }

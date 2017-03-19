@@ -28,7 +28,7 @@
 	</select>
 
 	<insert id="create" parameterType="Menu">
-		insert into t_menu (menu_id,parent_id,name) values (#{menuId},#{parentId},#{name})
+		insert into t_menu (menu_id,parent_id,name,status,url) values (#{menuId},#{parentId},#{name},#{status},#{url})
 	</insert>
 
 	<update id="update" parameterType="Menu">

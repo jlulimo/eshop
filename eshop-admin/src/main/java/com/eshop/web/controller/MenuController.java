@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -58,7 +59,16 @@ public class MenuController {
 		}
 		return result;
 	}
-	
+
+	@ResponseStatus(value = HttpStatus.OK)
+	@RequestMapping(value = "{menuId}", method = RequestMethod.GET)
+	@ResponseBody
+	public ResultModel queryMenuInfo(@PathVariable(value = "menuId") String menuId) {
+		ResultModel resultModel = new ResultModel();
+		resultModel = HttpUtil.exectGet(ResultModel.class, HttpUtil.ACCOUNT_BASE_URL + "/menu/" + menuId, null);
+		return resultModel;
+	}
+
 	@ResponseStatus(value = HttpStatus.OK)
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@ResponseBody
@@ -74,7 +84,7 @@ public class MenuController {
 			resultModel.setCode(PromptMsg.ADD_FAILED.getCode());
 			resultModel.setMsg("父节点ID为空");
 		} else {
-			resultModel = HttpUtil.exectPost(resultModel.getClass(),  menuNode, HttpUtil.ACCOUNT_BASE_URL + "/menu/add");
+			resultModel = HttpUtil.exectPost(resultModel.getClass(), menuNode, HttpUtil.ACCOUNT_BASE_URL + "/menu/add");
 		}
 		return resultModel;
 	}
@@ -97,7 +107,8 @@ public class MenuController {
 			resultModel.setCode(PromptMsg.EDIT_FAILED.getCode());
 			resultModel.setMsg("父节点ID为空");
 		} else {
-			resultModel = HttpUtil.exectPost(resultModel.getClass(), menuNode, HttpUtil.ACCOUNT_BASE_URL + "/menu/edit");
+			resultModel = HttpUtil.exectPost(resultModel.getClass(), menuNode,
+					HttpUtil.ACCOUNT_BASE_URL + "/menu/edit");
 		}
 		return resultModel;
 	}
@@ -114,7 +125,8 @@ public class MenuController {
 			resultModel.setCode(PromptMsg.DEL_FAILED.getCode());
 			resultModel.setMsg("节点ID为空");
 		} else {
-			resultModel = HttpUtil.exectPost(resultModel.getClass(), menuNode, HttpUtil.ACCOUNT_BASE_URL + "/menu/delete");
+			resultModel = HttpUtil.exectPost(resultModel.getClass(), menuNode,
+					HttpUtil.ACCOUNT_BASE_URL + "/menu/delete");
 		}
 		return resultModel;
 	}

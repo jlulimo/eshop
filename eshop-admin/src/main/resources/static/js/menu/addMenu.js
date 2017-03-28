@@ -9,9 +9,6 @@ $(function() {
                 var menuName = $('#addMenuName').attr('value');
                 var menuUrl = $('#addMenuUrl').attr('value');
                 var status = $('#addStatus').attr('value');
-
-
-
                 var ref = $('#treeview').jstree(true),
                     sel = ref.get_selected(true);
                 if (!sel.length) {

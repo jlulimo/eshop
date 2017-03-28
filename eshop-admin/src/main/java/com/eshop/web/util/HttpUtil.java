@@ -57,12 +57,15 @@ public class HttpUtil {
 		return t;
 	}
 
-	public static <T> T exectGet(Class<T> tClass,  String url, Map<String, String> param) {
+	public static <T> T exectGet(Class<T> tClass, String url, Map<String, String> param) {
 		T t = null;
 		HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-		for (Map.Entry<String, String> kvp : param.entrySet()) {
-			urlBuilder.addQueryParameter(kvp.getKey(), kvp.getValue());
+		if (null != param) {
+			for (Map.Entry<String, String> kvp : param.entrySet()) {
+				urlBuilder.addQueryParameter(kvp.getKey(), kvp.getValue());
+			}
 		}
+
 		String uri = urlBuilder.build().toString();
 		Request request = new Request.Builder().url(uri).build();
 		try {

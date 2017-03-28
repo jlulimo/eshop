@@ -3,12 +3,15 @@ package com.nnfs.api.account.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,6 +50,24 @@ public class MenuController extends BaseController<MenuModel, MenuDto> {
 			logger.error("菜单查询失败", e);
 		}
 		return result;
+	}
+
+	@ResponseStatus(value = HttpStatus.OK)
+	@RequestMapping(value = "{menuId}", method = RequestMethod.GET)
+	@ResponseBody
+	public ApiResult query(@PathVariable(value = "menuId") String menuId) {
+		ApiResult resultModel = new ApiResult();
+		if (StringUtils.isEmpty(menuId)) {
+			resultModel.setCode(PromptMsg.QUERY_FAILED.getCode());
+		} else {
+			try {
+				MenuDto menuDto = this.menuService.getById(menuId);
+				resultModel.setCode(PromptMsg.SUCCESS.getCode());
+				resultModel.setData(this.convertToModel(menuDto));
+			} catch (Exception e) {
+			}
+		}
+		return resultModel;
 	}
 
 	@ResponseStatus(value = HttpStatus.OK)

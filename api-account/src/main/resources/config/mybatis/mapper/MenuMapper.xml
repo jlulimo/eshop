@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nnfs.api.account.mapper.MenuMapper">
-	<select id="get" parameterType="long" resultType="Menu">
-		select * from t_menu where id = #{id}
+	<select id="get" parameterType="String" resultType="Menu">
+		select menu_id as menuId, parent_id as parentId,name,url,status from t_menu where menu_id = #{menu_id}
 	</select>
 	
 	<select id="getChildrenByParentId" parameterType="String" resultType="Menu">
@@ -32,7 +32,7 @@
 	</insert>
 
 	<update id="update" parameterType="Menu">
-		update t_menu set name =#{name}
+		update t_menu set name =#{name},url=#{url},status=#{status} 
 		where menu_id = #{menuId}
 	</update>
 

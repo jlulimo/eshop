@@ -2,6 +2,8 @@ package com.eshop.web.controller;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.NativeWebRequest;
 
 import com.alibaba.fastjson.JSON;
+import com.eshop.web.model.AccountModel;
 import com.eshop.web.model.LoginModel;
 import com.eshop.web.model.RegisterModel;
 import com.eshop.web.model.ResultModel;
@@ -22,12 +26,13 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 @Controller
+@RequestMapping(value="account")
 public class AccountController {
 
-	@RequestMapping("/")
+	@RequestMapping(value={"/","/index"})
 	String index(Model model) {
 		model.addAttribute("now", LocalDateTime.now());
-		return "index";
+		return "/account/index";
 	}
 
 	@GetMapping("properties")
@@ -112,6 +117,20 @@ public class AccountController {
 		ResultModel resultModel = new ResultModel();
 		resultModel.setCode(0);
 		resultModel.setData(5);
+		return resultModel;
+	}
+	
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	@ResponseBody
+	public ResultModel getUsers(){
+		ResultModel resultModel = new ResultModel();
+		List<AccountModel> users = new ArrayList<>();
+		AccountModel accountModel= new AccountModel();
+		accountModel.setName("mark");
+		accountModel.setGroupName("dev");
+		users.add(accountModel);
+		resultModel.setCode(0);
+		resultModel.setData(users);
 		return resultModel;
 	}
 

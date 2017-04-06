@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <div th:fragment="user">
+    <div th:fragment="users">
         <section class="content">
             <div class="row">
                 <div clas="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -32,8 +32,8 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <div class="btn-group pull-right">
-                                    <button id="cancelBtn" type="button" class="btn btn-success">清空</button>
-                                    <button id="saveBtn" type="button" class="btn btn-success">保存</button>
+                                    <button id="user_cancel_btn" type="button" class="btn btn-success">清空</button>
+                                    <button id="user_save_btn" type="button" class="btn btn-success">保存</button>
                                 </div>
                             </div>
                             <!-- /.box-footer -->
@@ -51,6 +51,7 @@
                         <div class="box-body">
                             <div class="row no-print" style="margin-bottom: 10px;">
                                 <div class="col-xs-12">
+                                    <a th:href="@{/account/add}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i>添加用户</a>
                                     <a th:href="@{/account/print}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
                                     <button type="button" class="btn btn-success"><i class="fa fa-credit-card"></i> Submit Payment
                                     </button>

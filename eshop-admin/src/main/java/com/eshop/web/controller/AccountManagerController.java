@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.eshop.web.model.AccountModel;
+import com.eshop.web.model.GroupModel;
 import com.eshop.web.model.LoginModel;
 import com.eshop.web.model.RegisterModel;
 import com.eshop.web.model.ResultModel;
@@ -26,7 +27,7 @@ import okhttp3.Response;
 
 @Controller
 @RequestMapping(value="account")
-public class AccountController {
+public class AccountManagerController {
 
 	@RequestMapping(value={"/","/index"})
 	String index(Model model) {
@@ -60,7 +61,10 @@ public class AccountController {
 		return "account/invoice-print";
 	}
 	
-	
+	@RequestMapping("/addGroup")
+	public String toAddGroup() {
+		return "account/group";
+	}
 
 	@RequestMapping(value = "/doRegister", method = RequestMethod.POST)
 	@ResponseBody
@@ -136,6 +140,36 @@ public class AccountController {
 		resultModel.setCode(0);
 		resultModel.setData(users);
 		return resultModel;
+	}
+	
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@ResponseBody
+	public ResultModel add(AccountModel account){
+		return null;
+	}
+	
+	@RequestMapping(value = "/groups", method = RequestMethod.GET)
+	@ResponseBody
+	public ResultModel getGroups(){
+		ResultModel resultModel = new ResultModel();
+		List<GroupModel> groups = new ArrayList<>();
+		GroupModel groupModel= new GroupModel();
+		groupModel.setName("testName");
+		groupModel.setDescription("test");
+		GroupModel groupModel2= new GroupModel();
+		groupModel.setName("test1Name");
+		groupModel.setDescription("test1");
+		groups.add(groupModel);
+		groups.add(groupModel2);
+		resultModel.setCode(0);
+		resultModel.setData(groups);
+		return resultModel;
+	}
+	
+	@RequestMapping(value = "/addGroup", method = RequestMethod.POST)
+	@ResponseBody
+	public ResultModel add(GroupModel group){
+		return null;
 	}
 
 }

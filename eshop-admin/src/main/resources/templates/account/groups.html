@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>组管理</title>
+</head>
+
+<body>
+    <div th:fragment="groups">
+        <section class="content">
+            <div class="row">
+                <div clas="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">查询条件</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <form class="form-horizontal">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="groupName" class="col-sm-1 control-label">组名</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" id="groupName" placeholder="用户名">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer">
+                                <div class="btn-group pull-right">
+                                    <button id="group_cancel_btn" type="button" class="btn btn-success">清空</button>
+                                    <button id="group_save_btn" type="button" class="btn btn-success">查询</button>
+                                </div>
+                            </div>
+                            <!-- /.box-footer -->
+                        </form>
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+            <div class="row">
+                <div clas="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">查询结果</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row no-print" style="margin-bottom: 10px;">
+                                <div class="col-xs-12">
+                                    <a th:href="@{/account/addGroup}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i>添加组</a>
+                                    <a th:href="@{/account/print}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+                                    <button type="button" class="btn btn-success"><i class="fa fa-credit-card"></i> Submit Payment
+                                    </button>
+                                    <button type="button" class="btn btn-primary" style="margin-right: 5px;">
+                                        <i class="fa fa-download"></i> Generate PDF
+                                    </button>
+                                </div>
+                            </div>
+                            <table id="groupTable" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>组名</th>
+                                        <th>描述</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

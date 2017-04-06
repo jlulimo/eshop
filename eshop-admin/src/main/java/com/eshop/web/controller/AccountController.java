@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.NativeWebRequest;
 
 import com.alibaba.fastjson.JSON;
 import com.eshop.web.model.AccountModel;
@@ -54,6 +53,11 @@ public class AccountController {
 	@RequestMapping("/dashboard")
 	public String dashboard() {
 		return "account/dashboard";
+	}
+	
+	@RequestMapping("/print")
+	public String print() {
+		return "account/invoice-print";
 	}
 	
 	

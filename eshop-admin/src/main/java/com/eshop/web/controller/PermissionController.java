@@ -20,10 +20,6 @@ import com.eshop.web.util.HttpUtil;
 @Controller
 @RequestMapping(value = "permission")
 public class PermissionController {
-	@RequestMapping(value = {"/","/index"}, method = RequestMethod.GET)
-	public String layout() {
-		return "/account/permission";
-	}
 	
 	@ResponseStatus(value = HttpStatus.OK)
 	@RequestMapping(value = "browse", method = RequestMethod.GET)

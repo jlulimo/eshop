@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,9 @@ import okhttp3.Response;
 @RequestMapping(value="account")
 public class AccountManagerController {
 
+	@Autowired
+	private PermissionController permissionController;
+	
 	@RequestMapping(value={"/","/index"})
 	String index(Model model) {
 		model.addAttribute("now", LocalDateTime.now());
@@ -62,7 +66,9 @@ public class AccountManagerController {
 	}
 	
 	@RequestMapping("/addGroup")
-	public String toAddGroup() {
+	public String toAddGroup(Model model) {
+		ResultModel resultModel = permissionController.browse("root");
+		model.addAttribute("menus", resultModel.getData());
 		return "account/group";
 	}
 
@@ -171,5 +177,7 @@ public class AccountManagerController {
 	public ResultModel add(GroupModel group){
 		return null;
 	}
+	
+	
 
 }

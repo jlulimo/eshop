@@ -175,4 +175,5 @@ public class MenuController extends BaseController<MenuModel, MenuDto> {
 		model.setUrl(t.getUrl());
 		return model;
 	}
+	
 }

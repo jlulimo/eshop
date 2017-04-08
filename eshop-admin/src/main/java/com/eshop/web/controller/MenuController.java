@@ -130,4 +130,23 @@ public class MenuController {
 		}
 		return resultModel;
 	}
+	
+	@ResponseStatus(value = HttpStatus.OK)
+	@RequestMapping(value = "menuList", method = RequestMethod.GET)
+	@ResponseBody
+	public ResultModel getMenuList(String parentId){
+		ResultModel resultModel = new ResultModel();
+		Map<String, String> parm = new HashMap<>();
+		parm.put("pid", parentId);
+		ResultModel apiResult = HttpUtil.exectGet(ResultModel.class, HttpUtil.ACCOUNT_BASE_URL + "/menu/browse",
+				parm);
+		if (apiResult.getCode() == PromptMsg.SUCCESS.getCode()) {
+			resultModel.setCode(PromptMsg.SUCCESS.getCode());
+			resultModel.setData(apiResult.getData());
+		} else {
+			resultModel.setCode(PromptMsg.QUERY_FAILED.getCode());
+			resultModel.setMsg(PromptMsg.QUERY_FAILED.getMsg());
+		}
+		return resultModel;
+	}
 }

@@ -4,8 +4,9 @@
 <head>
     <title>组</title>
     <link rel="stylesheet" th:href="@{/dist/css/jstree/themes/default/style.min.css}">
-    <script type="text/javascript" th:src="@{/dist/js/jstree/jstree.min.js}"></script>
     <script th:src="@{/js/account/group.js}"></script>
+    <script type="text/javascript" th:src="@{/dist/js/jstree/jstree.min.js}"></script>
+    
 </head>
 
 <body>
@@ -34,7 +35,7 @@
                                     <div class="nav-tabs-custom">
                                         <ul class="nav nav-tabs">
                                             <li th:each="menu,iter:${menus}" th:class="${iter.index == 0} ? 'active'">
-                                            	<a th:href="${menu.id}" th:id="${menu.id}" data-toggle="tab" th:text="${menu.text}"></a>
+                                            	<a th:href="'#'+${menu.id}" data-toggle="tab" th:text="${menu.text}"></a>
                                             </li>  
 											
 
@@ -43,13 +44,11 @@
                                             <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
                                         </ul>
                                         <div class="tab-content">
-											<!-- <div th:each="menu,iter:${menus}" th:id="${menu.id}" th:class="${iter.index == 0} ? 'tab-pane active': 'tab-pane'">
-                                                <div id="permissionTree"></div>
-                                            </div> -->
-
-                                            <div class="tab-pane active">
-                                                <div id="permissionTree"></div>
+											<div th:each="menu,iter:${menus}" th:id="${menu.id}" th:class="${iter.index == 0} ? 'tab-pane active': 'tab-pane'">
+                                                <div th:id="${menu.id}+'tree'"></div>
                                             </div>
+
+                                            
                                             <!-- <div class="tab-pane" id="tab_2">
                                                 <div th:include="account/users :: users"></div>
                                             </div> -->
@@ -70,6 +69,7 @@
             </div>
         </div>
     </div>
+
 </body>
 
 </html>

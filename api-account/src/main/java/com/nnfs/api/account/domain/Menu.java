@@ -1,5 +1,7 @@
 package com.nnfs.api.account.domain;
 
+import com.nnfs.api.account.constant.MenuType;
+
 public class Menu {
 	private long id;
 	private String menuId;
@@ -7,6 +9,15 @@ public class Menu {
 	private String name;
 	private int status;
 	private String url;
+	private int type;
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
 
 	public int getStatus() {
 		return status;

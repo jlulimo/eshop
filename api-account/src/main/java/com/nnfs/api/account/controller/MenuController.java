@@ -3,8 +3,6 @@ package com.nnfs.api.account.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.nnfs.api.account.constant.MenuType;
 import com.nnfs.api.account.constant.PromptMsg;
 import com.nnfs.api.account.dto.MenuDto;
 import com.nnfs.api.account.model.ApiResult;
@@ -158,6 +157,20 @@ public class MenuController extends BaseController<MenuModel, MenuDto> {
 		dto.setParentId(d.getParent());
 		dto.setStatus(d.getStatus());
 		dto.setUrl(d.getUrl());
+
+		switch (d.getType()) {
+		case 0:
+			dto.setType(MenuType.MODEL);
+			break;
+		case 1:
+			dto.setType(MenuType.MENU);
+			break;
+		case 2:
+			dto.setType(MenuType.FUNCTION);
+			break;
+		default:
+			break;
+		}
 		return dto;
 	}
 
@@ -173,7 +186,8 @@ public class MenuController extends BaseController<MenuModel, MenuDto> {
 		model.setChildren(true);
 		model.setStatus(t.getStatus());
 		model.setUrl(t.getUrl());
+		model.setType(t.getType().ordinal());
 		return model;
 	}
-	
+
 }

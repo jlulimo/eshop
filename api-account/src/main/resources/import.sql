@@ -94,6 +94,7 @@ create table t_menu(
 	name varchar(100),
 	status int,
 	url varchar(100),
+	type int,
 	constraint pk_t_menu primary key(id)
 )charset=utf8 ENGINE=InnoDB;
 

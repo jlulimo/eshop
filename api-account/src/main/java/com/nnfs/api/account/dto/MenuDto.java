@@ -1,11 +1,22 @@
 package com.nnfs.api.account.dto;
 
+import com.nnfs.api.account.constant.MenuType;
+
 public class MenuDto {
 	private String menuId;
 	private String parentId;
 	private String name;
 	private String url;
 	private int status;
+	private MenuType type;
+
+	public MenuType getType() {
+		return type;
+	}
+
+	public void setType(MenuType type) {
+		this.type = type;
+	}
 
 	public String getUrl() {
 		return url;

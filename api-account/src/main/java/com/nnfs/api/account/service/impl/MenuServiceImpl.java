@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nnfs.api.account.constant.MenuType;
 import com.nnfs.api.account.dao.MenuDao;
 import com.nnfs.api.account.domain.Menu;
 import com.nnfs.api.account.dto.MenuDto;
@@ -32,13 +33,14 @@ public class MenuServiceImpl extends GenericServiceImpl<MenuDto, Menu> implement
 		}
 		if (StringUtils.isEmpty(t.getMenuId())) {
 			domain.setMenuId(UUID.randomUUID().toString());
-		}else{
+		} else {
 			domain.setMenuId(t.getMenuId());
 		}
 		domain.setName(t.getName());
 		domain.setParentId(t.getParentId());
 		domain.setStatus(t.getStatus());
 		domain.setUrl(t.getUrl());
+		domain.setType(t.getType().ordinal());
 		return domain;
 	}
 
@@ -53,6 +55,19 @@ public class MenuServiceImpl extends GenericServiceImpl<MenuDto, Menu> implement
 		dto.setParentId(d.getParentId());
 		dto.setStatus(d.getStatus());
 		dto.setUrl(d.getUrl());
+		switch (d.getType()) {
+		case 0:
+			dto.setType(MenuType.MODEL);
+			break;
+		case 1:
+			dto.setType(MenuType.MENU);
+			break;
+		case 2:
+			dto.setType(MenuType.FUNCTION);
+			break;
+		default:
+			break;
+		}
 		return dto;
 	}
 

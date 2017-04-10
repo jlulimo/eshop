@@ -4,11 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nnfs.api.account.mapper.MenuMapper">
 	<select id="get" parameterType="String" resultType="Menu">
-		select menu_id as menuId, parent_id as parentId,name,url,status from t_menu where menu_id = #{menu_id}
+		select menu_id as menuId, parent_id as parentId,name,url,status,type from t_menu where menu_id = #{menu_id}
 	</select>
 	
 	<select id="getChildrenByParentId" parameterType="String" resultType="Menu">
-		select menu_id as menuId, parent_id as parentId, name  from t_menu where parent_id = #{menuId}
+		select menu_id as menuId, parent_id as parentId, name ,type from t_menu where parent_id = #{menuId}
 	</select>
 	
 	<select id="getMenuById" parameterType="String" resultType="Menu">
@@ -28,11 +28,11 @@
 	</select>
 
 	<insert id="create" parameterType="Menu">
-		insert into t_menu (menu_id,parent_id,name,status,url) values (#{menuId},#{parentId},#{name},#{status},#{url})
+		insert into t_menu (menu_id,parent_id,name,status,url,type) values (#{menuId},#{parentId},#{name},#{status},#{url},#{type})
 	</insert>
 
 	<update id="update" parameterType="Menu">
-		update t_menu set name =#{name},url=#{url},status=#{status} 
+		update t_menu set name =#{name},url=#{url},status=#{status} ,type=#{type]}
 		where menu_id = #{menuId}
 	</update>
 

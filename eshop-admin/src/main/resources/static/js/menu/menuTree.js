@@ -17,6 +17,7 @@ $(function() {
                 var menuName = $('#addMenuName').val();
                 var menuUrl = $('#addMenuUrl').val();
                 var status = $('#addStatus').val();
+                var menuType = $('#addMenuType').val();
                 var ref = $('#treeview').jstree(true),
                     sel = ref.get_selected(true);
                 if (!sel.length) {
@@ -32,7 +33,8 @@ $(function() {
                             parent: sel.id,
                             text: menuName,
                             url: menuUrl,
-                            status: status
+                            status: status,
+                            type:menuType
                         }),
                     })
                     .done(function(result) {
@@ -178,6 +180,7 @@ $(function() {
                             $('#menuName').val(menuInfo.text);
                             $('#menuUrl').val(menuInfo.url);
                             $('#status').val(menuInfo.status);
+                            $('#menuType').val(menuInfo.type);
                         }
                         console.log("success");
                     })

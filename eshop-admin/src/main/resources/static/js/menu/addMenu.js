@@ -5,6 +5,15 @@ $(function() {
         },
 
         initEvent: function() {
+            $('#addMenuType').change(function(event) {
+                /* Act on the event */
+                var menuType = $('#addMenuType').attr('value');
+                if (menuType == 0) {
+                    $('#add-url-form-group').hide();
+                }else{
+                    $('#add-url-form-group').show();
+                }
+            });
             $('#addOkBtn').on('click', function(event) {
                 var menuName = $('#addMenuName').attr('value');
                 var menuUrl = $('#addMenuUrl').attr('value');

@@ -178,9 +178,15 @@ $(function() {
                         if (result.code == 0) {
                             var menuInfo = result.data;
                             $('#menuName').val(menuInfo.text);
-                            $('#menuUrl').val(menuInfo.url);
+                            
                             $('#status').val(menuInfo.status);
                             $('#menuType').val(menuInfo.type);
+                            if (menuInfo.type == 0) {
+                                $('#url-form-group').hide();
+                            }else{
+                                $('#menuUrl').val(menuInfo.url);
+                                $('#url-form-group').show();
+                            }
                         }
                         console.log("success");
                     })

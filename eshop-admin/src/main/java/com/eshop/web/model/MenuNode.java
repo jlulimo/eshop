@@ -1,7 +1,5 @@
 package com.eshop.web.model;
 
-import com.eshop.web.constants.MenuType;
-
 public class MenuNode {
 	private String id;
 	private String parent;
@@ -9,13 +7,13 @@ public class MenuNode {
 	private boolean children;
 	private String url;
 	private int status;
-	private MenuType type;
+	private int type;
 
-	public MenuType getType() {
+	public int getType() {
 		return type;
 	}
 
-	public void setType(MenuType type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 

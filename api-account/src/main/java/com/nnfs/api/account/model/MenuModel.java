@@ -1,7 +1,5 @@
 package com.nnfs.api.account.model;
 
-import com.nnfs.api.account.constant.MenuType;
-
 public class MenuModel {
 	private String id;
 	private String parent;

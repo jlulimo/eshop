@@ -1,11 +1,14 @@
 package com.eshop.web.controller;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,6 +54,27 @@ public class PermissionController {
 				result.setMsg(PromptMsg.QUERY_FAILED.getMsg());
 			}
 		}
+		return result;
+	}
+	
+	@ResponseStatus(value = HttpStatus.OK)
+	@RequestMapping(value = "apply", method = RequestMethod.GET)
+	@ResponseBody
+	public ResultModel apply(@RequestParam(value="menuIds")String[] menuIds){
+		ResultModel result = new ResultModel();
+		if (!ArrayUtils.isEmpty(menuIds)) {
+			Map<String, String[]> parm = new HashMap<>();
+			parm.put("menuIds", menuIds);
+			ResultModel apiResult = HttpUtil.exectPost(ResultModel.class, parm, HttpUtil.ACCOUNT_BASE_URL + "/permission/apply");
+			if (apiResult.getCode() == PromptMsg.SUCCESS.getCode()) {
+				result.setCode(PromptMsg.SUCCESS.getCode());
+				result.setData(apiResult.getData());
+			} else {
+				result.setCode(PromptMsg.EDIT_FAILED.getCode());
+				result.setMsg(PromptMsg.EDIT_FAILED.getMsg());
+			}
+		}
+		
 		return result;
 	}
 	

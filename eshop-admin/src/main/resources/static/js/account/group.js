@@ -47,18 +47,41 @@ $(function() {
         initEvent: function() {
             $('#user_save_btn').click(function(event) {
                 /* Act on the event */
+                var menuIds = [];
                 var lis = $('.nav.nav-tabs li');
                 for (var i = 0; i < lis.length; i++) {
                     var href = lis[i].children[0].href;
                     var temp = href.split('#');
                     var menuId = temp[temp.length - 1];
                     if (menuId != "") {
-                        var ref = $('#'+menuId+'tree').jstree(true),
+                        var ref = $('#' + menuId + 'tree').jstree(true),
                             sel = ref.get_checked(true);
-                            alert(sel);
-                            //根据type selectall;
+                        for (var i = 0; i < sel.length; i++) {
+                            menuIds.push(sel[i].id);
+                        }
+
                     }
                 }
+
+                $.ajax({
+                        contentType: "application/json; charset=utf-8",
+                        url: constants.BASE_URL + '/permission/apply?',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: JSON.stringify({ "menuIds": menuIds }),
+                    })
+                    .done(function(result) {
+                        if (result.code == 0) {
+                            console.log("success");
+                        }
+
+                    })
+                    .fail(function(result) {
+                        console.log("error");
+                    })
+                    .always(function() {
+                        console.log("complete");
+                    });
 
             });
             $('.nav.nav-tabs li').click(function(event) {

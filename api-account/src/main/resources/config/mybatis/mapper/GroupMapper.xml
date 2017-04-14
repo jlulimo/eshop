@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nnfs.api.account.mapper.GroupMapper">
+	<select id="get" parameterType="String" resultType="Group">
+		select group_id as groupId, name description,type from t_group where group_id = #{groupId}
+	</select>
+	
+	<select id="getGroupByName" parameterType="String" resultType="Group">
+		select * from t_group where name = #{name}
+	</select>
+
+	<select id="getAll" resultType="Group">
+		select * from t_group;
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) from t_group
+	</select>
+
+	<insert id="create" parameterType="Group">
+		insert into t_group (group_id,name,description,type) values (#{groupId},#{name},#{description},#{type})
+	</insert>
+
+	<update id="update" parameterType="Group">
+		update t_group set name = #{name}, description= #{description}, type= #{type}
+		where Group_id = #{GroupId}
+	</update>
+
+	<delete id="delete" parameterType="String">
+		delete from t_group where group_id = #{groupId}
+	</delete>
+</mapper>

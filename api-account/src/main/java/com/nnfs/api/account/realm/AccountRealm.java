@@ -61,9 +61,11 @@ public class AccountRealm extends AuthorizingRealm {
 			if (CollectionUtils.isNotEmpty(groups)) {
 				List<Role> group_roles = new ArrayList<>();
 				for (Group group : groups) {
-					if (CollectionUtils.isNotEmpty(group.getRoles())) {
-						group_roles.addAll(group.getRoles());
-					}
+					
+					// check permission
+//					if (CollectionUtils.isNotEmpty(group.getRoles())) {
+//						group_roles.addAll(group.getRoles());
+//					}
 				}
 				if (CollectionUtils.isNotEmpty(group_roles)) {
 					List<String> group_roleNames = new ArrayList<>();

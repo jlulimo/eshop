@@ -68,7 +68,7 @@ $(function() {
                         url: constants.BASE_URL + '/permission/apply?',
                         type: 'POST',
                         dataType: 'json',
-                        data: JSON.stringify({ "menuIds": menuIds }),
+                        data: JSON.stringify(menuIds),
                     })
                     .done(function(result) {
                         if (result.code == 0) {

@@ -1,13 +1,17 @@
-package com.nnfs.api.account.domain;
+package com.nnfs.api.account.model;
 
 import java.util.List;
 
-public class Group {
+import com.nnfs.api.account.domain.Account;
+
+public class GroupModel {
 	private long id;
 	private String groupId;
 	private String name;
+	private String description;
 	private int type;
 	private List<Account> accounts;
+	private List<String> permissions;
 
 	public long getId() {
 		return id;
@@ -33,6 +37,14 @@ public class Group {
 		this.name = name;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public int getType() {
 		return type;
 	}
@@ -47,6 +59,14 @@ public class Group {
 
 	public void setAccounts(List<Account> accounts) {
 		this.accounts = accounts;
+	}
+
+	public List<String> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(List<String> permissions) {
+		this.permissions = permissions;
 	}
 
 }

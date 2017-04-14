@@ -1,13 +1,33 @@
-package com.nnfs.api.account.domain;
+package com.nnfs.api.account.dto;
 
 import java.util.List;
 
-public class Group {
+import com.nnfs.api.account.domain.Account;
+
+public class GroupDto {
 	private long id;
 	private String groupId;
 	private String name;
+	private String description;
 	private int type;
 	private List<Account> accounts;
+	private List<String> permissions;
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public List<String> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(List<String> permissions) {
+		this.permissions = permissions;
+	}
 
 	public long getId() {
 		return id;

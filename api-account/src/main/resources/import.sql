@@ -30,11 +30,20 @@ create unique index idx_name on t_account(name);
 
 create table t_group (
   id bigint auto_increment,
+  group_id varchar(100),
   name varchar(100),
+  description varchar(100),
   type int,
   constraint pk_t_group primary key(id)
 ) charset=utf8 ENGINE=InnoDB;
 create unique index idx_name on t_group(name);
+
+create table t_group_permission(
+	id bigint auto_increment,
+	group_id varchar(100),
+	permission_id varchar(100),
+	constraint t_group_permission primary key(id)
+)charset=utf8 ENGINE=InnoDB;
 
 create table t_role(
   id bigint auto_increment,
@@ -104,6 +113,8 @@ create table t_role_menu(
 	menu_id varchar(100),
 	constraint t_role_menu primary key(id)
 )charset=utf8 ENGINE=InnoDB;
+
+
 
 insert into t_account(name,password)values('zhang','123');
 

@@ -1,14 +1,14 @@
 package com.eshop.web.controller;
 
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,9 +58,9 @@ public class PermissionController {
 	}
 	
 	@ResponseStatus(value = HttpStatus.OK)
-	@RequestMapping(value = "apply", method = RequestMethod.GET)
+	@RequestMapping(value = "apply", method = RequestMethod.POST)
 	@ResponseBody
-	public ResultModel apply(@RequestParam(value="menuIds")String[] menuIds){
+	public ResultModel apply(@RequestBody String[] menuIds){
 		ResultModel result = new ResultModel();
 		if (!ArrayUtils.isEmpty(menuIds)) {
 			Map<String, String[]> parm = new HashMap<>();

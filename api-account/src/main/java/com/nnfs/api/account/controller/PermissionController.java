@@ -1,7 +1,9 @@
 package com.nnfs.api.account.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,12 +12,17 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.nnfs.api.account.constant.MenuType;
 import com.nnfs.api.account.dto.MenuDto;
 import com.nnfs.api.account.model.ApiResult;
+import com.nnfs.api.account.model.GroupModel;
 import com.nnfs.api.account.model.MenuModel;
+import com.nnfs.api.account.service.GroupService;
 
 @Controller
 @RequestMapping(value = "permission")
 public class PermissionController extends BaseController<MenuModel, MenuDto>{
 
+	@Autowired
+	private GroupService groupService;
+	
 	@Override
 	public MenuDto convertToDto(MenuModel d) {
 		MenuDto menuDto = new MenuDto();
@@ -53,10 +60,13 @@ public class PermissionController extends BaseController<MenuModel, MenuDto>{
 		return menuModel;
 	}
 	
+	
+	
 	@ResponseStatus(value = HttpStatus.OK)
 	@RequestMapping(value = "apply", method = RequestMethod.POST)
 	@ResponseBody
-	public ApiResult apply(String[] menuIds){
+	public ApiResult apply(@RequestBody String[] menuIds){
+		
 		return null;
 	}
 	

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nnfs.api.account.dao.GroupDao;
-import com.nnfs.api.account.dao.GroupPermissionDao;
 import com.nnfs.api.account.domain.Group;
 import com.nnfs.api.account.dto.GroupDto;
 import com.nnfs.api.account.service.GroupService;

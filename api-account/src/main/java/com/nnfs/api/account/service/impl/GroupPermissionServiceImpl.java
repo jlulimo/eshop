@@ -1,9 +1,12 @@
 package com.nnfs.api.account.service.impl;
 
+import org.springframework.stereotype.Service;
+
 import com.nnfs.api.account.domain.GroupPermission;
 import com.nnfs.api.account.dto.GroupPermissionDto;
 import com.nnfs.api.account.service.GroupPermissionService;
 
+@Service
 public class GroupPermissionServiceImpl extends GenericServiceImpl<GroupPermissionDto, GroupPermission>
 		implements GroupPermissionService {
 

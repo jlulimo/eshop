@@ -1,11 +1,13 @@
 package com.nnfs.api.account.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.nnfs.api.account.dao.GroupDao;
 import com.nnfs.api.account.domain.Group;
 import com.nnfs.api.account.mapper.GroupMapper;
 
+@Repository
 public class GroupDaoImpl extends GenericDaoImpl<Group> implements GroupDao {
 	@Autowired
 	private GroupMapper groupMapper;
@@ -18,6 +20,5 @@ public class GroupDaoImpl extends GenericDaoImpl<Group> implements GroupDao {
 	public void setMenuMapper(GroupMapper groupMapper) {
 		this.groupMapper = groupMapper;
 	}
-	
-	
+
 }

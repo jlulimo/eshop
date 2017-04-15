@@ -6,8 +6,16 @@ public class Group {
 	private long id;
 	private String groupId;
 	private String name;
+	private String description;
 	private int type;
-	private List<Account> accounts;
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	public long getId() {
 		return id;
@@ -40,13 +48,4 @@ public class Group {
 	public void setType(int type) {
 		this.type = type;
 	}
-
-	public List<Account> getAccounts() {
-		return accounts;
-	}
-
-	public void setAccounts(List<Account> accounts) {
-		this.accounts = accounts;
-	}
-
 }

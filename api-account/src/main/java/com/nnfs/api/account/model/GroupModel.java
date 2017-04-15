@@ -2,24 +2,12 @@ package com.nnfs.api.account.model;
 
 import java.util.List;
 
-import com.nnfs.api.account.domain.Account;
-
 public class GroupModel {
-	private long id;
 	private String groupId;
 	private String name;
 	private String description;
 	private int type;
-	private List<Account> accounts;
 	private List<String> permissions;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public String getGroupId() {
 		return groupId;
@@ -51,14 +39,6 @@ public class GroupModel {
 
 	public void setType(int type) {
 		this.type = type;
-	}
-
-	public List<Account> getAccounts() {
-		return accounts;
-	}
-
-	public void setAccounts(List<Account> accounts) {
-		this.accounts = accounts;
 	}
 
 	public List<String> getPermissions() {

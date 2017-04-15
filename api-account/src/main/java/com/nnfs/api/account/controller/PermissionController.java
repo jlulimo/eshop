@@ -63,9 +63,9 @@ public class PermissionController extends BaseController<MenuModel, MenuDto>{
 	
 	
 	@ResponseStatus(value = HttpStatus.OK)
-	@RequestMapping(value = "apply", method = RequestMethod.POST)
+	@RequestMapping(value = "create", method = RequestMethod.POST)
 	@ResponseBody
-	public ApiResult apply(@RequestBody String[] menuIds){
+	public ApiResult apply(@RequestBody GroupModel groupModel){
 		
 		return null;
 	}

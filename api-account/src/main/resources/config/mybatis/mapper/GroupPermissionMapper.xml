@@ -4,15 +4,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nnfs.api.account.mapper.GroupPermissionMapper">
 	<insert id="create" parameterType="GroupPermission">
-		insert into t_group_permission (group_id,permission_id) values (#{groupId},#{permissionId})
+		insert into t_group_permission
+		(group_id,permission_id) values (#{groupId},#{permissionId})
+	</insert>
+
+	<insert id="batchAdd" useGeneratedKeys="true" parameterType="java.util.List">
+		<selectKey resultType="long" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+		insert into t_group_permission (group_id,permission_id)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.groupId},#{item.permissionId})
+		</foreach>
 	</insert>
 
 	<update id="update" parameterType="Group">
-		update t_group_permission set permission_id =#{permissionId}
+		update t_group_permission set
+		permission_id =#{permissionId}
 		where group_id = #{groupId}
 	</update>
 
 	<delete id="delete" parameterType="String">
-		delete from t_group_permission where group_id = #{groupId}
+		delete from t_group_permission
+		where group_id = #{groupId}
 	</delete>
 </mapper>

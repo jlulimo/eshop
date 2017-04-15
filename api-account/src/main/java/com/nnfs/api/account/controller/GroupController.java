@@ -2,6 +2,8 @@ package com.nnfs.api.account.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +15,8 @@ import com.nnfs.api.account.model.ApiResult;
 import com.nnfs.api.account.model.GroupModel;
 import com.nnfs.api.account.service.GroupService;
 
+@Controller
+@RequestMapping(value="group")
 public class GroupController extends BaseController<GroupModel, GroupDto> {
 	@Autowired
 	private GroupService groupService;
@@ -20,10 +24,8 @@ public class GroupController extends BaseController<GroupModel, GroupDto> {
 	@Override
 	public GroupDto convertToDto(GroupModel d) {
 		GroupDto dto = new GroupDto();
-		dto.setAccounts(d.getAccounts());
 		dto.setDescription(d.getDescription());
 		dto.setGroupId(d.getGroupId());
-		dto.setId(d.getId());
 		dto.setName(d.getName());
 		dto.setPermissions(d.getPermissions());
 		dto.setType(d.getType());
@@ -33,10 +35,8 @@ public class GroupController extends BaseController<GroupModel, GroupDto> {
 	@Override
 	public GroupModel convertToModel(GroupDto t) {
 		GroupModel model = new GroupModel();
-		model.setAccounts(t.getAccounts());
 		model.setDescription(t.getDescription());
 		model.setGroupId(t.getGroupId());
-		model.setId(t.getId());
 		model.setName(t.getName());
 		model.setPermissions(t.getPermissions());
 		model.setType(t.getType());
@@ -46,7 +46,7 @@ public class GroupController extends BaseController<GroupModel, GroupDto> {
 	@ResponseStatus(value = HttpStatus.OK)
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@ResponseBody
-	public ApiResult create(GroupModel groupModel) {
+	public ApiResult create(@RequestBody GroupModel groupModel) {
 		ApiResult apiResult = new ApiResult();
 		try {
 			GroupDto dto = this.convertToDto(groupModel);

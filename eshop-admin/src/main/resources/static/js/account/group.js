@@ -63,12 +63,19 @@ $(function() {
                     }
                 }
 
+                var groupName = $('#groupName').val();
+                var description = $('#groupDescription').val();
+
                 $.ajax({
                         contentType: "application/json; charset=utf-8",
-                        url: constants.BASE_URL + '/permission/apply?',
+                        url: constants.BASE_URL + '/permission/create?',
                         type: 'POST',
                         dataType: 'json',
-                        data: JSON.stringify(menuIds),
+                        data: JSON.stringify({
+                        	name:groupName,
+                        	description:description,
+                        	permissions:menuIds
+                        }),
                     })
                     .done(function(result) {
                         if (result.code == 0) {

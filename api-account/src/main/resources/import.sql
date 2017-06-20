@@ -1,17 +1,16 @@
-
-drop table if exists t_account;
+drop table if exists t_account; 
+drop table if exists t_account_token;
 drop table if exists t_group;
 drop table if exists t_role;
-drop table if exists t_permission;
 
-drop table if exists t_account_role;
 drop table if exists t_account_group;
+drop table if exists t_account_role;
 drop table if exists t_group_role;
-drop table if exists t_role_permission;
-drop table if exists t_account_token;
 
+drop table if exists t_permission;
 drop table if exists t_menu;
-drop table if exists t_role_menu;
+drop table if exists t_permission_menu;
+drop table if exists t_role_permission;
 
 create table t_account (
   id bigint auto_increment,
@@ -37,13 +36,6 @@ create table t_group (
   constraint pk_t_group primary key(id)
 ) charset=utf8 ENGINE=InnoDB;
 create unique index idx_name on t_group(name);
-
-create table t_group_permission(
-	id bigint auto_increment,
-	group_id varchar(100),
-	permission_id varchar(100),
-	constraint t_group_permission primary key(id)
-)charset=utf8 ENGINE=InnoDB;
 
 create table t_role(
   id bigint auto_increment,
@@ -107,15 +99,11 @@ create table t_menu(
 	constraint pk_t_menu primary key(id)
 )charset=utf8 ENGINE=InnoDB;
 
-create table t_role_menu(
+create table t_permission_menu(
 	id bigint auto_increment,
-	role_id varchar(100),
+	permission_id varchar(100),
 	menu_id varchar(100),
-	constraint t_role_menu primary key(id)
+	constraint t_permission_menu primary key(id)
 )charset=utf8 ENGINE=InnoDB;
 
-
-
 insert into t_account(name,password)values('zhang','123');
-
-

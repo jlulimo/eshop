@@ -45,6 +45,7 @@ create table t_role(
 ) charset=utf8 ENGINE=InnoDB;
 create unique index idx_name on t_role(name);
 
+
 create table t_permission(
   id bigint auto_increment,
   name varchar(100),
